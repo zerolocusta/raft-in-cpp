@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+package raft_msg;
+
+
+message VoteResponse {
+	required uint64 term=1;
+	required bool vote_granted=2;
+}

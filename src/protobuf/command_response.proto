@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package raft_msg;
+
+import "raft_enum.proto";
+
+message CommandResponse {
+
+    required uint64 command_id = 1;
+    required bool success  = 2;
+    required string passwd = 3;
+    required CommandType command_type = 4;
+    required CommandResponseErr err = 5;
+
+    message Entry {
+        required string key   = 1;
+        required string value = 2;
+    }
+
+    required Entry result = 6;
+}

@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+package raft_msg;
+
+message JoinRequest {
+  required string ipaddr = 1;
+  required string passwd = 2;
+  required string myname = 3;
+}

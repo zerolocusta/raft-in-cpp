@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package raft_msg;   
+
+enum CommandResponseErr {
+    CMDWRONGPASS = 0;
+    CMDREDIRECT  = 1;
+    CMDUNKNOWERR = 2;
+}
+
+enum JoinError {
+    JOINWRONGPASS = 0;
+    JOINUNKNOWERR = 1;
+}
+    
+enum CommandType{
+    RAFT_EVENT_GET       = 0;
+    RAFT_EVENT_PUT       = 1;
+    RAFT_EVENT_DELETE    = 2;
+}
+    
