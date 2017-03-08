@@ -36,7 +36,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesResponse, term_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesResponse, index_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesResponse, current_index_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesResponse, commit_index_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AppendEntriesResponse, success_),
   0,
@@ -96,12 +96,12 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
       "\n\035append_entries_response.proto\022\010raft_ms"
-      "g\"[\n\025AppendEntriesResponse\022\014\n\004term\030\001 \002(\004"
-      "\022\r\n\005index\030\002 \002(\004\022\024\n\014commit_index\030\003 \002(\004\022\017\n"
-      "\007success\030\004 \002(\010"
+      "g\"c\n\025AppendEntriesResponse\022\014\n\004term\030\001 \002(\004"
+      "\022\025\n\rcurrent_index\030\002 \002(\004\022\024\n\014commit_index\030"
+      "\003 \002(\004\022\017\n\007success\030\004 \002(\010"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 134);
+      descriptor, 142);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "append_entries_response.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
@@ -125,7 +125,7 @@ struct StaticDescriptorInitializer {
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int AppendEntriesResponse::kTermFieldNumber;
-const int AppendEntriesResponse::kIndexFieldNumber;
+const int AppendEntriesResponse::kCurrentIndexFieldNumber;
 const int AppendEntriesResponse::kCommitIndexFieldNumber;
 const int AppendEntriesResponse::kSuccessFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
@@ -220,13 +220,13 @@ bool AppendEntriesResponse::MergePartialFromCodedStream(
         break;
       }
 
-      // required uint64 index = 2;
+      // required uint64 current_index = 2;
       case 2: {
         if (tag == 16u) {
-          set_has_index();
+          set_has_current_index();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &index_)));
+                 input, &current_index_)));
         } else {
           goto handle_unusual;
         }
@@ -289,9 +289,9 @@ void AppendEntriesResponse::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->term(), output);
   }
 
-  // required uint64 index = 2;
-  if (has_index()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->index(), output);
+  // required uint64 current_index = 2;
+  if (has_current_index()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->current_index(), output);
   }
 
   // required uint64 commit_index = 3;
@@ -320,9 +320,9 @@ void AppendEntriesResponse::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->term(), target);
   }
 
-  // required uint64 index = 2;
-  if (has_index()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->index(), target);
+  // required uint64 current_index = 2;
+  if (has_current_index()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->current_index(), target);
   }
 
   // required uint64 commit_index = 3;
@@ -354,11 +354,11 @@ size_t AppendEntriesResponse::RequiredFieldsByteSizeFallback() const {
         this->term());
   }
 
-  if (has_index()) {
-    // required uint64 index = 2;
+  if (has_current_index()) {
+    // required uint64 current_index = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
-        this->index());
+        this->current_index());
   }
 
   if (has_commit_index()) {
@@ -390,10 +390,10 @@ size_t AppendEntriesResponse::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
         this->term());
 
-    // required uint64 index = 2;
+    // required uint64 current_index = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
-        this->index());
+        this->current_index());
 
     // required uint64 commit_index = 3;
     total_size += 1 +
@@ -436,8 +436,8 @@ void AppendEntriesResponse::MergeFrom(const AppendEntriesResponse& from) {
     if (from.has_term()) {
       set_term(from.term());
     }
-    if (from.has_index()) {
-      set_index(from.index());
+    if (from.has_current_index()) {
+      set_current_index(from.current_index());
     }
     if (from.has_commit_index()) {
       set_commit_index(from.commit_index());
@@ -473,7 +473,7 @@ void AppendEntriesResponse::Swap(AppendEntriesResponse* other) {
 }
 void AppendEntriesResponse::InternalSwap(AppendEntriesResponse* other) {
   std::swap(term_, other->term_);
-  std::swap(index_, other->index_);
+  std::swap(current_index_, other->current_index_);
   std::swap(commit_index_, other->commit_index_);
   std::swap(success_, other->success_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -513,28 +513,28 @@ void AppendEntriesResponse::set_term(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:raft_msg.AppendEntriesResponse.term)
 }
 
-// required uint64 index = 2;
-bool AppendEntriesResponse::has_index() const {
+// required uint64 current_index = 2;
+bool AppendEntriesResponse::has_current_index() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-void AppendEntriesResponse::set_has_index() {
+void AppendEntriesResponse::set_has_current_index() {
   _has_bits_[0] |= 0x00000002u;
 }
-void AppendEntriesResponse::clear_has_index() {
+void AppendEntriesResponse::clear_has_current_index() {
   _has_bits_[0] &= ~0x00000002u;
 }
-void AppendEntriesResponse::clear_index() {
-  index_ = GOOGLE_ULONGLONG(0);
-  clear_has_index();
+void AppendEntriesResponse::clear_current_index() {
+  current_index_ = GOOGLE_ULONGLONG(0);
+  clear_has_current_index();
 }
-::google::protobuf::uint64 AppendEntriesResponse::index() const {
-  // @@protoc_insertion_point(field_get:raft_msg.AppendEntriesResponse.index)
-  return index_;
+::google::protobuf::uint64 AppendEntriesResponse::current_index() const {
+  // @@protoc_insertion_point(field_get:raft_msg.AppendEntriesResponse.current_index)
+  return current_index_;
 }
-void AppendEntriesResponse::set_index(::google::protobuf::uint64 value) {
-  set_has_index();
-  index_ = value;
-  // @@protoc_insertion_point(field_set:raft_msg.AppendEntriesResponse.index)
+void AppendEntriesResponse::set_current_index(::google::protobuf::uint64 value) {
+  set_has_current_index();
+  current_index_ = value;
+  // @@protoc_insertion_point(field_set:raft_msg.AppendEntriesResponse.current_index)
 }
 
 // required uint64 commit_index = 3;

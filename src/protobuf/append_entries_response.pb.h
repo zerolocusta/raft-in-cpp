@@ -132,12 +132,12 @@ class AppendEntriesResponse : public ::google::protobuf::Message /* @@protoc_ins
   ::google::protobuf::uint64 term() const;
   void set_term(::google::protobuf::uint64 value);
 
-  // required uint64 index = 2;
-  bool has_index() const;
-  void clear_index();
-  static const int kIndexFieldNumber = 2;
-  ::google::protobuf::uint64 index() const;
-  void set_index(::google::protobuf::uint64 value);
+  // required uint64 current_index = 2;
+  bool has_current_index() const;
+  void clear_current_index();
+  static const int kCurrentIndexFieldNumber = 2;
+  ::google::protobuf::uint64 current_index() const;
+  void set_current_index(::google::protobuf::uint64 value);
 
   // required uint64 commit_index = 3;
   bool has_commit_index() const;
@@ -157,8 +157,8 @@ class AppendEntriesResponse : public ::google::protobuf::Message /* @@protoc_ins
  private:
   void set_has_term();
   void clear_has_term();
-  void set_has_index();
-  void clear_has_index();
+  void set_has_current_index();
+  void clear_has_current_index();
   void set_has_commit_index();
   void clear_has_commit_index();
   void set_has_success();
@@ -171,7 +171,7 @@ class AppendEntriesResponse : public ::google::protobuf::Message /* @@protoc_ins
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
   ::google::protobuf::uint64 term_;
-  ::google::protobuf::uint64 index_;
+  ::google::protobuf::uint64 current_index_;
   ::google::protobuf::uint64 commit_index_;
   bool success_;
   friend struct  protobuf_append_5fentries_5fresponse_2eproto::TableStruct;
@@ -208,28 +208,28 @@ inline void AppendEntriesResponse::set_term(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:raft_msg.AppendEntriesResponse.term)
 }
 
-// required uint64 index = 2;
-inline bool AppendEntriesResponse::has_index() const {
+// required uint64 current_index = 2;
+inline bool AppendEntriesResponse::has_current_index() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void AppendEntriesResponse::set_has_index() {
+inline void AppendEntriesResponse::set_has_current_index() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void AppendEntriesResponse::clear_has_index() {
+inline void AppendEntriesResponse::clear_has_current_index() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void AppendEntriesResponse::clear_index() {
-  index_ = GOOGLE_ULONGLONG(0);
-  clear_has_index();
+inline void AppendEntriesResponse::clear_current_index() {
+  current_index_ = GOOGLE_ULONGLONG(0);
+  clear_has_current_index();
 }
-inline ::google::protobuf::uint64 AppendEntriesResponse::index() const {
-  // @@protoc_insertion_point(field_get:raft_msg.AppendEntriesResponse.index)
-  return index_;
+inline ::google::protobuf::uint64 AppendEntriesResponse::current_index() const {
+  // @@protoc_insertion_point(field_get:raft_msg.AppendEntriesResponse.current_index)
+  return current_index_;
 }
-inline void AppendEntriesResponse::set_index(::google::protobuf::uint64 value) {
-  set_has_index();
-  index_ = value;
-  // @@protoc_insertion_point(field_set:raft_msg.AppendEntriesResponse.index)
+inline void AppendEntriesResponse::set_current_index(::google::protobuf::uint64 value) {
+  set_has_current_index();
+  current_index_ = value;
+  // @@protoc_insertion_point(field_set:raft_msg.AppendEntriesResponse.current_index)
 }
 
 // required uint64 commit_index = 3;

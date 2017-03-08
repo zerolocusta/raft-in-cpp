@@ -1,6 +1,12 @@
 #ifndef RAFT_IN_CPP_RAFR_H
 #define RAFT_IN_CPP_RAFR_H
 
+namespace raft
+{
+typedef std::string key_t;
+typedef std::string value_t;
+typedef std::pair<key_t, value_t> entry_t;
+
 enum
 {
     NORMAL_TIMEOUT = 300;
@@ -15,5 +21,6 @@ enum RAFT_STATE
     RAFT_STATE_CANDIDATE,
     RAFT_STATE_LEADER
 };
+}
 
 #endif // RAFT_IN_CPP_RAFR_H
