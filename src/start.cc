@@ -1,7 +1,7 @@
 #include "raft_server.h"
 #include <exception>
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     try
     {
@@ -9,7 +9,8 @@ int main(int argc, char* argv[])
         boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::tcp::v4(), DEFAUTL_PORT);
         RaftServer raftServer(io_service, endpoint);
         io_service.run();
-    }catch(std::exception& e)
+    }
+    catch (std::exception &e)
     {
         std::cerr << "Exception: " << e.what() << "\n";
     }

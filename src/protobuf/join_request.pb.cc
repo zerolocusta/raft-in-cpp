@@ -35,16 +35,18 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinRequest, role_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinRequest, ipaddr_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinRequest, passwd_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinRequest, myname_),
+  3,
   0,
   1,
   2,
 };
 
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
-  { 0, 7, sizeof(JoinRequest)},
+  { 0, 8, sizeof(JoinRequest)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -83,6 +85,7 @@ void TableStruct::InitDefaultsImpl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::internal::InitProtobufDefaults();
+  ::raft_msg::protobuf_raft_5fenum_2eproto::InitDefaults();
   _JoinRequest_default_instance_.DefaultConstruct();
 }
 
@@ -93,14 +96,16 @@ void InitDefaults() {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
-      "\n\022join_request.proto\022\010raft_msg\"=\n\013JoinRe"
-      "quest\022\016\n\006ipaddr\030\001 \002(\t\022\016\n\006passwd\030\002 \002(\t\022\016\n"
-      "\006myname\030\003 \002(\t"
+      "\n\022join_request.proto\022\010raft_msg\032\017raft_enu"
+      "m.proto\"_\n\013JoinRequest\022 \n\004role\030\001 \002(\0162\022.r"
+      "aft_msg.JoinRole\022\016\n\006ipaddr\030\002 \002(\t\022\016\n\006pass"
+      "wd\030\003 \002(\t\022\016\n\006myname\030\004 \002(\t"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 93);
+      descriptor, 144);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "join_request.proto", &protobuf_RegisterTypes);
+  ::raft_msg::protobuf_raft_5fenum_2eproto::AddDescriptors();
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
 }
 
@@ -121,6 +126,7 @@ struct StaticDescriptorInitializer {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int JoinRequest::kRoleFieldNumber;
 const int JoinRequest::kIpaddrFieldNumber;
 const int JoinRequest::kPasswdFieldNumber;
 const int JoinRequest::kMynameFieldNumber;
@@ -152,6 +158,7 @@ JoinRequest::JoinRequest(const JoinRequest& from)
   if (from.has_myname()) {
     myname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.myname_);
   }
+  role_ = from.role_;
   // @@protoc_insertion_point(copy_constructor:raft_msg.JoinRequest)
 }
 
@@ -160,6 +167,7 @@ void JoinRequest::SharedCtor() {
   ipaddr_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   passwd_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   myname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  role_ = 0;
 }
 
 JoinRequest::~JoinRequest() {
@@ -212,6 +220,7 @@ void JoinRequest::Clear() {
       (*myname_.UnsafeRawStringPointer())->clear();
     }
   }
+  role_ = 0;
   _has_bits_.Clear();
   _internal_metadata_.Clear();
 }
@@ -226,9 +235,27 @@ bool JoinRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string ipaddr = 1;
+      // required .raft_msg.JoinRole role = 1;
       case 1: {
-        if (tag == 10u) {
+        if (tag == 8u) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::raft_msg::JoinRole_IsValid(value)) {
+            set_role(static_cast< ::raft_msg::JoinRole >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required string ipaddr = 2;
+      case 2: {
+        if (tag == 18u) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_ipaddr()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -241,9 +268,9 @@ bool JoinRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // required string passwd = 2;
-      case 2: {
-        if (tag == 18u) {
+      // required string passwd = 3;
+      case 3: {
+        if (tag == 26u) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_passwd()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -256,9 +283,9 @@ bool JoinRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // required string myname = 3;
-      case 3: {
-        if (tag == 26u) {
+      // required string myname = 4;
+      case 4: {
+        if (tag == 34u) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_myname()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -296,34 +323,40 @@ failure:
 void JoinRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:raft_msg.JoinRequest)
-  // required string ipaddr = 1;
+  // required .raft_msg.JoinRole role = 1;
+  if (has_role()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->role(), output);
+  }
+
+  // required string ipaddr = 2;
   if (has_ipaddr()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->ipaddr().data(), this->ipaddr().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "raft_msg.JoinRequest.ipaddr");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->ipaddr(), output);
+      2, this->ipaddr(), output);
   }
 
-  // required string passwd = 2;
+  // required string passwd = 3;
   if (has_passwd()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->passwd().data(), this->passwd().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "raft_msg.JoinRequest.passwd");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->passwd(), output);
+      3, this->passwd(), output);
   }
 
-  // required string myname = 3;
+  // required string myname = 4;
   if (has_myname()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->myname().data(), this->myname().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "raft_msg.JoinRequest.myname");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->myname(), output);
+      4, this->myname(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -337,7 +370,13 @@ void JoinRequest::SerializeWithCachedSizes(
     bool deterministic, ::google::protobuf::uint8* target) const {
   (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:raft_msg.JoinRequest)
-  // required string ipaddr = 1;
+  // required .raft_msg.JoinRole role = 1;
+  if (has_role()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->role(), target);
+  }
+
+  // required string ipaddr = 2;
   if (has_ipaddr()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->ipaddr().data(), this->ipaddr().length(),
@@ -345,10 +384,10 @@ void JoinRequest::SerializeWithCachedSizes(
       "raft_msg.JoinRequest.ipaddr");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->ipaddr(), target);
+        2, this->ipaddr(), target);
   }
 
-  // required string passwd = 2;
+  // required string passwd = 3;
   if (has_passwd()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->passwd().data(), this->passwd().length(),
@@ -356,10 +395,10 @@ void JoinRequest::SerializeWithCachedSizes(
       "raft_msg.JoinRequest.passwd");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->passwd(), target);
+        3, this->passwd(), target);
   }
 
-  // required string myname = 3;
+  // required string myname = 4;
   if (has_myname()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->myname().data(), this->myname().length(),
@@ -367,7 +406,7 @@ void JoinRequest::SerializeWithCachedSizes(
       "raft_msg.JoinRequest.myname");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->myname(), target);
+        4, this->myname(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -383,24 +422,30 @@ size_t JoinRequest::RequiredFieldsByteSizeFallback() const {
   size_t total_size = 0;
 
   if (has_ipaddr()) {
-    // required string ipaddr = 1;
+    // required string ipaddr = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->ipaddr());
   }
 
   if (has_passwd()) {
-    // required string passwd = 2;
+    // required string passwd = 3;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->passwd());
   }
 
   if (has_myname()) {
-    // required string myname = 3;
+    // required string myname = 4;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->myname());
+  }
+
+  if (has_role()) {
+    // required .raft_msg.JoinRole role = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->role());
   }
 
   return total_size;
@@ -414,21 +459,25 @@ size_t JoinRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required string ipaddr = 1;
+  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
+    // required string ipaddr = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->ipaddr());
 
-    // required string passwd = 2;
+    // required string passwd = 3;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->passwd());
 
-    // required string myname = 3;
+    // required string myname = 4;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->myname());
+
+    // required .raft_msg.JoinRole role = 1;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->role());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
@@ -459,7 +508,7 @@ void JoinRequest::MergeFrom(const JoinRequest& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:raft_msg.JoinRequest)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 7u) {
+  if (from._has_bits_[0 / 32] & 15u) {
     if (from.has_ipaddr()) {
       set_has_ipaddr();
       ipaddr_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.ipaddr_);
@@ -471,6 +520,9 @@ void JoinRequest::MergeFrom(const JoinRequest& from) {
     if (from.has_myname()) {
       set_has_myname();
       myname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.myname_);
+    }
+    if (from.has_role()) {
+      set_role(from.role());
     }
   }
 }
@@ -490,7 +542,7 @@ void JoinRequest::CopyFrom(const JoinRequest& from) {
 }
 
 bool JoinRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
   return true;
 }
 
@@ -502,6 +554,7 @@ void JoinRequest::InternalSwap(JoinRequest* other) {
   ipaddr_.Swap(&other->ipaddr_);
   passwd_.Swap(&other->passwd_);
   myname_.Swap(&other->myname_);
+  std::swap(role_, other->role_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -515,7 +568,32 @@ void JoinRequest::InternalSwap(JoinRequest* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // JoinRequest
 
-// required string ipaddr = 1;
+// required .raft_msg.JoinRole role = 1;
+bool JoinRequest::has_role() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void JoinRequest::set_has_role() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void JoinRequest::clear_has_role() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+void JoinRequest::clear_role() {
+  role_ = 0;
+  clear_has_role();
+}
+::raft_msg::JoinRole JoinRequest::role() const {
+  // @@protoc_insertion_point(field_get:raft_msg.JoinRequest.role)
+  return static_cast< ::raft_msg::JoinRole >(role_);
+}
+void JoinRequest::set_role(::raft_msg::JoinRole value) {
+  assert(::raft_msg::JoinRole_IsValid(value));
+  set_has_role();
+  role_ = value;
+  // @@protoc_insertion_point(field_set:raft_msg.JoinRequest.role)
+}
+
+// required string ipaddr = 2;
 bool JoinRequest::has_ipaddr() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -577,7 +655,7 @@ void JoinRequest::set_allocated_ipaddr(::std::string* ipaddr) {
   // @@protoc_insertion_point(field_set_allocated:raft_msg.JoinRequest.ipaddr)
 }
 
-// required string passwd = 2;
+// required string passwd = 3;
 bool JoinRequest::has_passwd() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -639,7 +717,7 @@ void JoinRequest::set_allocated_passwd(::std::string* passwd) {
   // @@protoc_insertion_point(field_set_allocated:raft_msg.JoinRequest.passwd)
 }
 
-// required string myname = 3;
+// required string myname = 4;
 bool JoinRequest::has_myname() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }

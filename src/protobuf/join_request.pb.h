@@ -28,6 +28,7 @@
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
 #include <google/protobuf/unknown_field_set.h>
+#include "raft_enum.pb.h"
 // @@protoc_insertion_point(includes)
 namespace raft_msg {
 class JoinRequest;
@@ -125,10 +126,10 @@ class JoinRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // required string ipaddr = 1;
+  // required string ipaddr = 2;
   bool has_ipaddr() const;
   void clear_ipaddr();
-  static const int kIpaddrFieldNumber = 1;
+  static const int kIpaddrFieldNumber = 2;
   const ::std::string& ipaddr() const;
   void set_ipaddr(const ::std::string& value);
   #if LANG_CXX11
@@ -140,10 +141,10 @@ class JoinRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_ipaddr();
   void set_allocated_ipaddr(::std::string* ipaddr);
 
-  // required string passwd = 2;
+  // required string passwd = 3;
   bool has_passwd() const;
   void clear_passwd();
-  static const int kPasswdFieldNumber = 2;
+  static const int kPasswdFieldNumber = 3;
   const ::std::string& passwd() const;
   void set_passwd(const ::std::string& value);
   #if LANG_CXX11
@@ -155,10 +156,10 @@ class JoinRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_passwd();
   void set_allocated_passwd(::std::string* passwd);
 
-  // required string myname = 3;
+  // required string myname = 4;
   bool has_myname() const;
   void clear_myname();
-  static const int kMynameFieldNumber = 3;
+  static const int kMynameFieldNumber = 4;
   const ::std::string& myname() const;
   void set_myname(const ::std::string& value);
   #if LANG_CXX11
@@ -170,8 +171,17 @@ class JoinRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_myname();
   void set_allocated_myname(::std::string* myname);
 
+  // required .raft_msg.JoinRole role = 1;
+  bool has_role() const;
+  void clear_role();
+  static const int kRoleFieldNumber = 1;
+  ::raft_msg::JoinRole role() const;
+  void set_role(::raft_msg::JoinRole value);
+
   // @@protoc_insertion_point(class_scope:raft_msg.JoinRequest)
  private:
+  void set_has_role();
+  void clear_has_role();
   void set_has_ipaddr();
   void clear_has_ipaddr();
   void set_has_passwd();
@@ -188,6 +198,7 @@ class JoinRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::internal::ArenaStringPtr ipaddr_;
   ::google::protobuf::internal::ArenaStringPtr passwd_;
   ::google::protobuf::internal::ArenaStringPtr myname_;
+  int role_;
   friend struct  protobuf_join_5frequest_2eproto::TableStruct;
 };
 // ===================================================================
@@ -198,7 +209,32 @@ class JoinRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
 // JoinRequest
 
-// required string ipaddr = 1;
+// required .raft_msg.JoinRole role = 1;
+inline bool JoinRequest::has_role() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void JoinRequest::set_has_role() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void JoinRequest::clear_has_role() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void JoinRequest::clear_role() {
+  role_ = 0;
+  clear_has_role();
+}
+inline ::raft_msg::JoinRole JoinRequest::role() const {
+  // @@protoc_insertion_point(field_get:raft_msg.JoinRequest.role)
+  return static_cast< ::raft_msg::JoinRole >(role_);
+}
+inline void JoinRequest::set_role(::raft_msg::JoinRole value) {
+  assert(::raft_msg::JoinRole_IsValid(value));
+  set_has_role();
+  role_ = value;
+  // @@protoc_insertion_point(field_set:raft_msg.JoinRequest.role)
+}
+
+// required string ipaddr = 2;
 inline bool JoinRequest::has_ipaddr() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -260,7 +296,7 @@ inline void JoinRequest::set_allocated_ipaddr(::std::string* ipaddr) {
   // @@protoc_insertion_point(field_set_allocated:raft_msg.JoinRequest.ipaddr)
 }
 
-// required string passwd = 2;
+// required string passwd = 3;
 inline bool JoinRequest::has_passwd() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -322,7 +358,7 @@ inline void JoinRequest::set_allocated_passwd(::std::string* passwd) {
   // @@protoc_insertion_point(field_set_allocated:raft_msg.JoinRequest.passwd)
 }
 
-// required string myname = 3;
+// required string myname = 4;
 inline bool JoinRequest::has_myname() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }

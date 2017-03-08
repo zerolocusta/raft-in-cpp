@@ -24,7 +24,7 @@ namespace protobuf_raft_5fenum_2eproto {
 
 namespace {
 
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[3];
+const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[4];
 
 }  // namespace
 
@@ -69,15 +69,16 @@ void InitDefaults() {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
-      "\n\017raft_enum.proto\022\010raft_msg*I\n\022CommandRe"
-      "sponseErr\022\020\n\014CMDWRONGPASS\020\000\022\017\n\013CMDREDIRE"
-      "CT\020\001\022\020\n\014CMDUNKNOWERR\020\002*1\n\tJoinError\022\021\n\rJ"
-      "OINWRONGPASS\020\000\022\021\n\rJOINUNKNOWERR\020\001*L\n\013Com"
-      "mandType\022\022\n\016RAFT_EVENT_GET\020\000\022\022\n\016RAFT_EVE"
-      "NT_PUT\020\001\022\025\n\021RAFT_EVENT_DELETE\020\002"
+      "\n\017raft_enum.proto\022\010raft_msg**\n\010JoinRole\022"
+      "\016\n\nJoinServer\020\000\022\016\n\nJoinClient\020\001*I\n\022Comma"
+      "ndResponseErr\022\020\n\014CMDWRONGPASS\020\000\022\017\n\013CMDRE"
+      "DIRECT\020\001\022\020\n\014CMDUNKNOWERR\020\002*1\n\tJoinError\022"
+      "\021\n\rJOINWRONGPASS\020\000\022\021\n\rJOINUNKNOWERR\020\001*L\n"
+      "\013CommandType\022\022\n\016RAFT_EVENT_GET\020\000\022\022\n\016RAFT"
+      "_EVENT_PUT\020\001\022\025\n\021RAFT_EVENT_DELETE\020\002"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 231);
+      descriptor, 275);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "raft_enum.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
@@ -96,9 +97,23 @@ struct StaticDescriptorInitializer {
 
 }  // namespace protobuf_raft_5fenum_2eproto
 
-const ::google::protobuf::EnumDescriptor* CommandResponseErr_descriptor() {
+const ::google::protobuf::EnumDescriptor* JoinRole_descriptor() {
   protobuf_raft_5fenum_2eproto::protobuf_AssignDescriptorsOnce();
   return protobuf_raft_5fenum_2eproto::file_level_enum_descriptors[0];
+}
+bool JoinRole_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* CommandResponseErr_descriptor() {
+  protobuf_raft_5fenum_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_raft_5fenum_2eproto::file_level_enum_descriptors[1];
 }
 bool CommandResponseErr_IsValid(int value) {
   switch (value) {
@@ -113,7 +128,7 @@ bool CommandResponseErr_IsValid(int value) {
 
 const ::google::protobuf::EnumDescriptor* JoinError_descriptor() {
   protobuf_raft_5fenum_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_raft_5fenum_2eproto::file_level_enum_descriptors[1];
+  return protobuf_raft_5fenum_2eproto::file_level_enum_descriptors[2];
 }
 bool JoinError_IsValid(int value) {
   switch (value) {
@@ -127,7 +142,7 @@ bool JoinError_IsValid(int value) {
 
 const ::google::protobuf::EnumDescriptor* CommandType_descriptor() {
   protobuf_raft_5fenum_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_raft_5fenum_2eproto::file_level_enum_descriptors[2];
+  return protobuf_raft_5fenum_2eproto::file_level_enum_descriptors[3];
 }
 bool CommandType_IsValid(int value) {
   switch (value) {

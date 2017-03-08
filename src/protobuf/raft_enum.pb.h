@@ -44,6 +44,25 @@ void AddDescriptors();
 void InitDefaults();
 }  // namespace protobuf_raft_5fenum_2eproto
 
+enum JoinRole {
+  JoinServer = 0,
+  JoinClient = 1
+};
+bool JoinRole_IsValid(int value);
+const JoinRole JoinRole_MIN = JoinServer;
+const JoinRole JoinRole_MAX = JoinClient;
+const int JoinRole_ARRAYSIZE = JoinRole_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* JoinRole_descriptor();
+inline const ::std::string& JoinRole_Name(JoinRole value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    JoinRole_descriptor(), value);
+}
+inline bool JoinRole_Parse(
+    const ::std::string& name, JoinRole* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<JoinRole>(
+    JoinRole_descriptor(), name, value);
+}
 enum CommandResponseErr {
   CMDWRONGPASS = 0,
   CMDREDIRECT = 1,
@@ -123,6 +142,11 @@ inline bool CommandType_Parse(
 namespace google {
 namespace protobuf {
 
+template <> struct is_proto_enum< ::raft_msg::JoinRole> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::raft_msg::JoinRole>() {
+  return ::raft_msg::JoinRole_descriptor();
+}
 template <> struct is_proto_enum< ::raft_msg::CommandResponseErr> : ::google::protobuf::internal::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::raft_msg::CommandResponseErr>() {

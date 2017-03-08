@@ -7,21 +7,19 @@
 #include <memory>
 #include <boost/asio.hpp>
 
-
 using boost::asio::ip::tcp;
 
 class RaftServer
 {
 
-public:
-    explicit RaftServer(boost::asio::io_service&,
-                        const tcp::endpoint&);
+  public:
+    explicit RaftServer(boost::asio::io_service &,
+                        const tcp::endpoint &);
     ~RaftServer();
 
-    void do_accept();
+    void DoAccept();
 
-
-private:
+  private:
     RaftNode node_;
     tcp::acceptor acceptor_;
     tcp::socket socket_;

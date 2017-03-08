@@ -4,8 +4,8 @@ package raft_msg;
 
 
 message AppendEntriesResponse {
-	required uint64 term         = 1;
-	required uint64 index        = 2;
-	required uint64 commit_index = 3;
-	required bool   success      = 4;
+	required uint64 term         	= 1;
+	required uint64 current_index   = 2;
+	required uint64 commit_index 	= 3;
+	required bool   success      	= 4;
 }

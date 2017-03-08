@@ -2,8 +2,11 @@ syntax = "proto2";
 
 package raft_msg;
 
+import "raft_enum.proto";
+
 message JoinRequest {
-  required string ipaddr = 1;
-  required string passwd = 2;
-  required string myname = 3;
+  required JoinRole role = 1;
+  required string ipaddr = 2;
+  required string passwd = 3;
+  required string myname = 4;
 }
