@@ -20,11 +20,11 @@ class RaftLogEntry
 {
 public:
   RaftLogEntry(
-      const uint64_t prev_log_term,
-      const uint64_t prev_log_index,
-      const CommandType command_type,
-      const std::string &command_key,
-      const std::string &connmad_value);
+      const uint64_t,
+      const uint64_t,
+      const CommandType,
+      const std::string &,
+      const std::string &);
 
   ~RaftLogEntry();
 

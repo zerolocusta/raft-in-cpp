@@ -5,14 +5,14 @@ namespace raft
 {
 typedef std::string key_t;
 typedef std::string value_t;
-typedef std::pair<key_t, value_t> entry_t;
+typedef std::pair< key_t, value_t > entry_t;
 
 enum
 {
     NORMAL_TIMEOUT = 300;
     ELECTION_TIMEOUT = 1000;
     DEFAUTL_PORT = 7970;
-}
+};
 
 enum RAFT_STATE
 {

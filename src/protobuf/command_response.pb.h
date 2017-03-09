@@ -34,9 +34,9 @@ namespace raft_msg {
 class CommandResponse;
 class CommandResponseDefaultTypeInternal;
 extern CommandResponseDefaultTypeInternal _CommandResponse_default_instance_;
-class CommandResponse_Entry;
-class CommandResponse_EntryDefaultTypeInternal;
-extern CommandResponse_EntryDefaultTypeInternal _CommandResponse_Entry_default_instance_;
+class KVEntry;
+class KVEntryDefaultTypeInternal;
+extern KVEntryDefaultTypeInternal _KVEntry_default_instance_;
 }  // namespace raft_msg
 
 namespace raft_msg {
@@ -53,130 +53,6 @@ void InitDefaults();
 }  // namespace protobuf_command_5fresponse_2eproto
 
 // ===================================================================
-
-class CommandResponse_Entry : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:raft_msg.CommandResponse.Entry) */ {
- public:
-  CommandResponse_Entry();
-  virtual ~CommandResponse_Entry();
-
-  CommandResponse_Entry(const CommandResponse_Entry& from);
-
-  inline CommandResponse_Entry& operator=(const CommandResponse_Entry& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const CommandResponse_Entry& default_instance();
-
-  static inline const CommandResponse_Entry* internal_default_instance() {
-    return reinterpret_cast<const CommandResponse_Entry*>(
-               &_CommandResponse_Entry_default_instance_);
-  }
-
-  void Swap(CommandResponse_Entry* other);
-
-  // implements Message ----------------------------------------------
-
-  inline CommandResponse_Entry* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  CommandResponse_Entry* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const CommandResponse_Entry& from);
-  void MergeFrom(const CommandResponse_Entry& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
-      const PROTOBUF_FINAL {
-    return InternalSerializeWithCachedSizesToArray(
-        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
-  }
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(CommandResponse_Entry* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required string key = 1;
-  bool has_key() const;
-  void clear_key();
-  static const int kKeyFieldNumber = 1;
-  const ::std::string& key() const;
-  void set_key(const ::std::string& value);
-  #if LANG_CXX11
-  void set_key(::std::string&& value);
-  #endif
-  void set_key(const char* value);
-  void set_key(const char* value, size_t size);
-  ::std::string* mutable_key();
-  ::std::string* release_key();
-  void set_allocated_key(::std::string* key);
-
-  // required string value = 2;
-  bool has_value() const;
-  void clear_value();
-  static const int kValueFieldNumber = 2;
-  const ::std::string& value() const;
-  void set_value(const ::std::string& value);
-  #if LANG_CXX11
-  void set_value(::std::string&& value);
-  #endif
-  void set_value(const char* value);
-  void set_value(const char* value, size_t size);
-  ::std::string* mutable_value();
-  ::std::string* release_value();
-  void set_allocated_value(::std::string* value);
-
-  // @@protoc_insertion_point(class_scope:raft_msg.CommandResponse.Entry)
- private:
-  void set_has_key();
-  void clear_has_key();
-  void set_has_value();
-  void clear_has_value();
-
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr key_;
-  ::google::protobuf::internal::ArenaStringPtr value_;
-  friend struct  protobuf_command_5fresponse_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
 
 class CommandResponse : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:raft_msg.CommandResponse) */ {
  public:
@@ -251,8 +127,6 @@ class CommandResponse : public ::google::protobuf::Message /* @@protoc_insertion
 
   // nested types ----------------------------------------------------
 
-  typedef CommandResponse_Entry Entry;
-
   // accessors -------------------------------------------------------
 
   // required string passwd = 3;
@@ -270,14 +144,14 @@ class CommandResponse : public ::google::protobuf::Message /* @@protoc_insertion
   ::std::string* release_passwd();
   void set_allocated_passwd(::std::string* passwd);
 
-  // required .raft_msg.CommandResponse.Entry result = 6;
+  // optional .raft_msg.KVEntry result = 5;
   bool has_result() const;
   void clear_result();
-  static const int kResultFieldNumber = 6;
-  const ::raft_msg::CommandResponse_Entry& result() const;
-  ::raft_msg::CommandResponse_Entry* mutable_result();
-  ::raft_msg::CommandResponse_Entry* release_result();
-  void set_allocated_result(::raft_msg::CommandResponse_Entry* result);
+  static const int kResultFieldNumber = 5;
+  const ::raft_msg::KVEntry& result() const;
+  ::raft_msg::KVEntry* mutable_result();
+  ::raft_msg::KVEntry* release_result();
+  void set_allocated_result(::raft_msg::KVEntry* result);
 
   // required uint64 command_id = 1;
   bool has_command_id() const;
@@ -293,17 +167,10 @@ class CommandResponse : public ::google::protobuf::Message /* @@protoc_insertion
   bool success() const;
   void set_success(bool value);
 
-  // required .raft_msg.CommandType command_type = 4;
-  bool has_command_type() const;
-  void clear_command_type();
-  static const int kCommandTypeFieldNumber = 4;
-  ::raft_msg::CommandType command_type() const;
-  void set_command_type(::raft_msg::CommandType value);
-
-  // required .raft_msg.CommandResponseErr err = 5;
+  // optional .raft_msg.CommandResponseErr err = 4;
   bool has_err() const;
   void clear_err();
-  static const int kErrFieldNumber = 5;
+  static const int kErrFieldNumber = 4;
   ::raft_msg::CommandResponseErr err() const;
   void set_err(::raft_msg::CommandResponseErr value);
 
@@ -315,8 +182,6 @@ class CommandResponse : public ::google::protobuf::Message /* @@protoc_insertion
   void clear_has_success();
   void set_has_passwd();
   void clear_has_passwd();
-  void set_has_command_type();
-  void clear_has_command_type();
   void set_has_err();
   void clear_has_err();
   void set_has_result();
@@ -329,10 +194,9 @@ class CommandResponse : public ::google::protobuf::Message /* @@protoc_insertion
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
   ::google::protobuf::internal::ArenaStringPtr passwd_;
-  ::raft_msg::CommandResponse_Entry* result_;
+  ::raft_msg::KVEntry* result_;
   ::google::protobuf::uint64 command_id_;
   bool success_;
-  int command_type_;
   int err_;
   friend struct  protobuf_command_5fresponse_2eproto::TableStruct;
 };
@@ -342,134 +206,6 @@ class CommandResponse : public ::google::protobuf::Message /* @@protoc_insertion
 // ===================================================================
 
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
-// CommandResponse_Entry
-
-// required string key = 1;
-inline bool CommandResponse_Entry::has_key() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void CommandResponse_Entry::set_has_key() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void CommandResponse_Entry::clear_has_key() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void CommandResponse_Entry::clear_key() {
-  key_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_key();
-}
-inline const ::std::string& CommandResponse_Entry::key() const {
-  // @@protoc_insertion_point(field_get:raft_msg.CommandResponse.Entry.key)
-  return key_.GetNoArena();
-}
-inline void CommandResponse_Entry::set_key(const ::std::string& value) {
-  set_has_key();
-  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:raft_msg.CommandResponse.Entry.key)
-}
-#if LANG_CXX11
-inline void CommandResponse_Entry::set_key(::std::string&& value) {
-  set_has_key();
-  key_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:raft_msg.CommandResponse.Entry.key)
-}
-#endif
-inline void CommandResponse_Entry::set_key(const char* value) {
-  set_has_key();
-  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:raft_msg.CommandResponse.Entry.key)
-}
-inline void CommandResponse_Entry::set_key(const char* value, size_t size) {
-  set_has_key();
-  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:raft_msg.CommandResponse.Entry.key)
-}
-inline ::std::string* CommandResponse_Entry::mutable_key() {
-  set_has_key();
-  // @@protoc_insertion_point(field_mutable:raft_msg.CommandResponse.Entry.key)
-  return key_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* CommandResponse_Entry::release_key() {
-  // @@protoc_insertion_point(field_release:raft_msg.CommandResponse.Entry.key)
-  clear_has_key();
-  return key_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void CommandResponse_Entry::set_allocated_key(::std::string* key) {
-  if (key != NULL) {
-    set_has_key();
-  } else {
-    clear_has_key();
-  }
-  key_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), key);
-  // @@protoc_insertion_point(field_set_allocated:raft_msg.CommandResponse.Entry.key)
-}
-
-// required string value = 2;
-inline bool CommandResponse_Entry::has_value() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void CommandResponse_Entry::set_has_value() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void CommandResponse_Entry::clear_has_value() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void CommandResponse_Entry::clear_value() {
-  value_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_value();
-}
-inline const ::std::string& CommandResponse_Entry::value() const {
-  // @@protoc_insertion_point(field_get:raft_msg.CommandResponse.Entry.value)
-  return value_.GetNoArena();
-}
-inline void CommandResponse_Entry::set_value(const ::std::string& value) {
-  set_has_value();
-  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:raft_msg.CommandResponse.Entry.value)
-}
-#if LANG_CXX11
-inline void CommandResponse_Entry::set_value(::std::string&& value) {
-  set_has_value();
-  value_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:raft_msg.CommandResponse.Entry.value)
-}
-#endif
-inline void CommandResponse_Entry::set_value(const char* value) {
-  set_has_value();
-  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:raft_msg.CommandResponse.Entry.value)
-}
-inline void CommandResponse_Entry::set_value(const char* value, size_t size) {
-  set_has_value();
-  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:raft_msg.CommandResponse.Entry.value)
-}
-inline ::std::string* CommandResponse_Entry::mutable_value() {
-  set_has_value();
-  // @@protoc_insertion_point(field_mutable:raft_msg.CommandResponse.Entry.value)
-  return value_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* CommandResponse_Entry::release_value() {
-  // @@protoc_insertion_point(field_release:raft_msg.CommandResponse.Entry.value)
-  clear_has_value();
-  return value_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void CommandResponse_Entry::set_allocated_value(::std::string* value) {
-  if (value != NULL) {
-    set_has_value();
-  } else {
-    clear_has_value();
-  }
-  value_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set_allocated:raft_msg.CommandResponse.Entry.value)
-}
-
-// -------------------------------------------------------------------
-
 // CommandResponse
 
 // required uint64 command_id = 1;
@@ -582,40 +318,15 @@ inline void CommandResponse::set_allocated_passwd(::std::string* passwd) {
   // @@protoc_insertion_point(field_set_allocated:raft_msg.CommandResponse.passwd)
 }
 
-// required .raft_msg.CommandType command_type = 4;
-inline bool CommandResponse::has_command_type() const {
+// optional .raft_msg.CommandResponseErr err = 4;
+inline bool CommandResponse::has_err() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void CommandResponse::set_has_command_type() {
+inline void CommandResponse::set_has_err() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void CommandResponse::clear_has_command_type() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void CommandResponse::clear_command_type() {
-  command_type_ = 0;
-  clear_has_command_type();
-}
-inline ::raft_msg::CommandType CommandResponse::command_type() const {
-  // @@protoc_insertion_point(field_get:raft_msg.CommandResponse.command_type)
-  return static_cast< ::raft_msg::CommandType >(command_type_);
-}
-inline void CommandResponse::set_command_type(::raft_msg::CommandType value) {
-  assert(::raft_msg::CommandType_IsValid(value));
-  set_has_command_type();
-  command_type_ = value;
-  // @@protoc_insertion_point(field_set:raft_msg.CommandResponse.command_type)
-}
-
-// required .raft_msg.CommandResponseErr err = 5;
-inline bool CommandResponse::has_err() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void CommandResponse::set_has_err() {
-  _has_bits_[0] |= 0x00000020u;
-}
 inline void CommandResponse::clear_has_err() {
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void CommandResponse::clear_err() {
   err_ = 0;
@@ -632,7 +343,7 @@ inline void CommandResponse::set_err(::raft_msg::CommandResponseErr value) {
   // @@protoc_insertion_point(field_set:raft_msg.CommandResponse.err)
 }
 
-// required .raft_msg.CommandResponse.Entry result = 6;
+// optional .raft_msg.KVEntry result = 5;
 inline bool CommandResponse::has_result() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -643,30 +354,30 @@ inline void CommandResponse::clear_has_result() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void CommandResponse::clear_result() {
-  if (result_ != NULL) result_->::raft_msg::CommandResponse_Entry::Clear();
+  if (result_ != NULL) result_->::raft_msg::KVEntry::Clear();
   clear_has_result();
 }
-inline const ::raft_msg::CommandResponse_Entry& CommandResponse::result() const {
+inline const ::raft_msg::KVEntry& CommandResponse::result() const {
   // @@protoc_insertion_point(field_get:raft_msg.CommandResponse.result)
   return result_ != NULL ? *result_
-                         : *::raft_msg::CommandResponse_Entry::internal_default_instance();
+                         : *::raft_msg::KVEntry::internal_default_instance();
 }
-inline ::raft_msg::CommandResponse_Entry* CommandResponse::mutable_result() {
+inline ::raft_msg::KVEntry* CommandResponse::mutable_result() {
   set_has_result();
   if (result_ == NULL) {
-    result_ = new ::raft_msg::CommandResponse_Entry;
+    result_ = new ::raft_msg::KVEntry;
   }
   // @@protoc_insertion_point(field_mutable:raft_msg.CommandResponse.result)
   return result_;
 }
-inline ::raft_msg::CommandResponse_Entry* CommandResponse::release_result() {
+inline ::raft_msg::KVEntry* CommandResponse::release_result() {
   // @@protoc_insertion_point(field_release:raft_msg.CommandResponse.result)
   clear_has_result();
-  ::raft_msg::CommandResponse_Entry* temp = result_;
+  ::raft_msg::KVEntry* temp = result_;
   result_ = NULL;
   return temp;
 }
-inline void CommandResponse::set_allocated_result(::raft_msg::CommandResponse_Entry* result) {
+inline void CommandResponse::set_allocated_result(::raft_msg::KVEntry* result) {
   delete result_;
   result_ = result;
   if (result) {
@@ -678,8 +389,6 @@ inline void CommandResponse::set_allocated_result(::raft_msg::CommandResponse_En
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
-// -------------------------------------------------------------------
-
 
 // @@protoc_insertion_point(namespace_scope)
 

@@ -31,12 +31,12 @@
 #include "raft_enum.pb.h"
 // @@protoc_insertion_point(includes)
 namespace raft_msg {
+class KVEntry;
+class KVEntryDefaultTypeInternal;
+extern KVEntryDefaultTypeInternal _KVEntry_default_instance_;
 class LogEntry;
 class LogEntryDefaultTypeInternal;
 extern LogEntryDefaultTypeInternal _LogEntry_default_instance_;
-class LogEntry_Entry;
-class LogEntry_EntryDefaultTypeInternal;
-extern LogEntry_EntryDefaultTypeInternal _LogEntry_Entry_default_instance_;
 }  // namespace raft_msg
 
 namespace raft_msg {
@@ -53,127 +53,6 @@ void InitDefaults();
 }  // namespace protobuf_log_5fentry_2eproto
 
 // ===================================================================
-
-class LogEntry_Entry : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:raft_msg.LogEntry.Entry) */ {
- public:
-  LogEntry_Entry();
-  virtual ~LogEntry_Entry();
-
-  LogEntry_Entry(const LogEntry_Entry& from);
-
-  inline LogEntry_Entry& operator=(const LogEntry_Entry& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const LogEntry_Entry& default_instance();
-
-  static inline const LogEntry_Entry* internal_default_instance() {
-    return reinterpret_cast<const LogEntry_Entry*>(
-               &_LogEntry_Entry_default_instance_);
-  }
-
-  void Swap(LogEntry_Entry* other);
-
-  // implements Message ----------------------------------------------
-
-  inline LogEntry_Entry* New() const PROTOBUF_FINAL { return New(NULL); }
-
-  LogEntry_Entry* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
-  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const LogEntry_Entry& from);
-  void MergeFrom(const LogEntry_Entry& from);
-  void Clear() PROTOBUF_FINAL;
-  bool IsInitialized() const PROTOBUF_FINAL;
-
-  size_t ByteSizeLong() const PROTOBUF_FINAL;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
-      const PROTOBUF_FINAL {
-    return InternalSerializeWithCachedSizesToArray(
-        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
-  }
-  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(LogEntry_Entry* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return NULL;
-  }
-  inline void* MaybeArenaPtr() const {
-    return NULL;
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required string key = 1;
-  bool has_key() const;
-  void clear_key();
-  static const int kKeyFieldNumber = 1;
-  const ::std::string& key() const;
-  void set_key(const ::std::string& value);
-  #if LANG_CXX11
-  void set_key(::std::string&& value);
-  #endif
-  void set_key(const char* value);
-  void set_key(const char* value, size_t size);
-  ::std::string* mutable_key();
-  ::std::string* release_key();
-  void set_allocated_key(::std::string* key);
-
-  // optional string value = 2;
-  bool has_value() const;
-  void clear_value();
-  static const int kValueFieldNumber = 2;
-  const ::std::string& value() const;
-  void set_value(const ::std::string& value);
-  #if LANG_CXX11
-  void set_value(::std::string&& value);
-  #endif
-  void set_value(const char* value);
-  void set_value(const char* value, size_t size);
-  ::std::string* mutable_value();
-  ::std::string* release_value();
-  void set_allocated_value(::std::string* value);
-
-  // @@protoc_insertion_point(class_scope:raft_msg.LogEntry.Entry)
- private:
-  void set_has_key();
-  void clear_has_key();
-  void set_has_value();
-  void clear_has_value();
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::internal::HasBits<1> _has_bits_;
-  mutable int _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr key_;
-  ::google::protobuf::internal::ArenaStringPtr value_;
-  friend struct  protobuf_log_5fentry_2eproto::TableStruct;
-};
-// -------------------------------------------------------------------
 
 class LogEntry : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:raft_msg.LogEntry) */ {
  public:
@@ -248,18 +127,16 @@ class LogEntry : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // nested types ----------------------------------------------------
 
-  typedef LogEntry_Entry Entry;
-
   // accessors -------------------------------------------------------
 
-  // required .raft_msg.LogEntry.Entry entry = 4;
+  // required .raft_msg.KVEntry entry = 4;
   bool has_entry() const;
   void clear_entry();
   static const int kEntryFieldNumber = 4;
-  const ::raft_msg::LogEntry_Entry& entry() const;
-  ::raft_msg::LogEntry_Entry* mutable_entry();
-  ::raft_msg::LogEntry_Entry* release_entry();
-  void set_allocated_entry(::raft_msg::LogEntry_Entry* entry);
+  const ::raft_msg::KVEntry& entry() const;
+  ::raft_msg::KVEntry* mutable_entry();
+  ::raft_msg::KVEntry* release_entry();
+  void set_allocated_entry(::raft_msg::KVEntry* entry);
 
   // required uint64 index = 1;
   bool has_index() const;
@@ -299,7 +176,7 @@ class LogEntry : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::raft_msg::LogEntry_Entry* entry_;
+  ::raft_msg::KVEntry* entry_;
   ::google::protobuf::uint64 index_;
   ::google::protobuf::uint64 term_;
   int command_type_;
@@ -311,134 +188,6 @@ class LogEntry : public ::google::protobuf::Message /* @@protoc_insertion_point(
 // ===================================================================
 
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
-// LogEntry_Entry
-
-// required string key = 1;
-inline bool LogEntry_Entry::has_key() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void LogEntry_Entry::set_has_key() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void LogEntry_Entry::clear_has_key() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void LogEntry_Entry::clear_key() {
-  key_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_key();
-}
-inline const ::std::string& LogEntry_Entry::key() const {
-  // @@protoc_insertion_point(field_get:raft_msg.LogEntry.Entry.key)
-  return key_.GetNoArena();
-}
-inline void LogEntry_Entry::set_key(const ::std::string& value) {
-  set_has_key();
-  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:raft_msg.LogEntry.Entry.key)
-}
-#if LANG_CXX11
-inline void LogEntry_Entry::set_key(::std::string&& value) {
-  set_has_key();
-  key_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:raft_msg.LogEntry.Entry.key)
-}
-#endif
-inline void LogEntry_Entry::set_key(const char* value) {
-  set_has_key();
-  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:raft_msg.LogEntry.Entry.key)
-}
-inline void LogEntry_Entry::set_key(const char* value, size_t size) {
-  set_has_key();
-  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:raft_msg.LogEntry.Entry.key)
-}
-inline ::std::string* LogEntry_Entry::mutable_key() {
-  set_has_key();
-  // @@protoc_insertion_point(field_mutable:raft_msg.LogEntry.Entry.key)
-  return key_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* LogEntry_Entry::release_key() {
-  // @@protoc_insertion_point(field_release:raft_msg.LogEntry.Entry.key)
-  clear_has_key();
-  return key_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void LogEntry_Entry::set_allocated_key(::std::string* key) {
-  if (key != NULL) {
-    set_has_key();
-  } else {
-    clear_has_key();
-  }
-  key_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), key);
-  // @@protoc_insertion_point(field_set_allocated:raft_msg.LogEntry.Entry.key)
-}
-
-// optional string value = 2;
-inline bool LogEntry_Entry::has_value() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void LogEntry_Entry::set_has_value() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void LogEntry_Entry::clear_has_value() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void LogEntry_Entry::clear_value() {
-  value_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_value();
-}
-inline const ::std::string& LogEntry_Entry::value() const {
-  // @@protoc_insertion_point(field_get:raft_msg.LogEntry.Entry.value)
-  return value_.GetNoArena();
-}
-inline void LogEntry_Entry::set_value(const ::std::string& value) {
-  set_has_value();
-  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:raft_msg.LogEntry.Entry.value)
-}
-#if LANG_CXX11
-inline void LogEntry_Entry::set_value(::std::string&& value) {
-  set_has_value();
-  value_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:raft_msg.LogEntry.Entry.value)
-}
-#endif
-inline void LogEntry_Entry::set_value(const char* value) {
-  set_has_value();
-  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:raft_msg.LogEntry.Entry.value)
-}
-inline void LogEntry_Entry::set_value(const char* value, size_t size) {
-  set_has_value();
-  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:raft_msg.LogEntry.Entry.value)
-}
-inline ::std::string* LogEntry_Entry::mutable_value() {
-  set_has_value();
-  // @@protoc_insertion_point(field_mutable:raft_msg.LogEntry.Entry.value)
-  return value_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* LogEntry_Entry::release_value() {
-  // @@protoc_insertion_point(field_release:raft_msg.LogEntry.Entry.value)
-  clear_has_value();
-  return value_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void LogEntry_Entry::set_allocated_value(::std::string* value) {
-  if (value != NULL) {
-    set_has_value();
-  } else {
-    clear_has_value();
-  }
-  value_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set_allocated:raft_msg.LogEntry.Entry.value)
-}
-
-// -------------------------------------------------------------------
-
 // LogEntry
 
 // required uint64 index = 1;
@@ -514,7 +263,7 @@ inline void LogEntry::set_command_type(::raft_msg::CommandType value) {
   // @@protoc_insertion_point(field_set:raft_msg.LogEntry.command_type)
 }
 
-// required .raft_msg.LogEntry.Entry entry = 4;
+// required .raft_msg.KVEntry entry = 4;
 inline bool LogEntry::has_entry() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -525,30 +274,30 @@ inline void LogEntry::clear_has_entry() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void LogEntry::clear_entry() {
-  if (entry_ != NULL) entry_->::raft_msg::LogEntry_Entry::Clear();
+  if (entry_ != NULL) entry_->::raft_msg::KVEntry::Clear();
   clear_has_entry();
 }
-inline const ::raft_msg::LogEntry_Entry& LogEntry::entry() const {
+inline const ::raft_msg::KVEntry& LogEntry::entry() const {
   // @@protoc_insertion_point(field_get:raft_msg.LogEntry.entry)
   return entry_ != NULL ? *entry_
-                         : *::raft_msg::LogEntry_Entry::internal_default_instance();
+                         : *::raft_msg::KVEntry::internal_default_instance();
 }
-inline ::raft_msg::LogEntry_Entry* LogEntry::mutable_entry() {
+inline ::raft_msg::KVEntry* LogEntry::mutable_entry() {
   set_has_entry();
   if (entry_ == NULL) {
-    entry_ = new ::raft_msg::LogEntry_Entry;
+    entry_ = new ::raft_msg::KVEntry;
   }
   // @@protoc_insertion_point(field_mutable:raft_msg.LogEntry.entry)
   return entry_;
 }
-inline ::raft_msg::LogEntry_Entry* LogEntry::release_entry() {
+inline ::raft_msg::KVEntry* LogEntry::release_entry() {
   // @@protoc_insertion_point(field_release:raft_msg.LogEntry.entry)
   clear_has_entry();
-  ::raft_msg::LogEntry_Entry* temp = entry_;
+  ::raft_msg::KVEntry* temp = entry_;
   entry_ = NULL;
   return temp;
 }
-inline void LogEntry::set_allocated_entry(::raft_msg::LogEntry_Entry* entry) {
+inline void LogEntry::set_allocated_entry(::raft_msg::KVEntry* entry) {
   delete entry_;
   entry_ = entry;
   if (entry) {
@@ -560,8 +309,6 @@ inline void LogEntry::set_allocated_entry(::raft_msg::LogEntry_Entry* entry) {
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
-// -------------------------------------------------------------------
-
 
 // @@protoc_insertion_point(namespace_scope)
 

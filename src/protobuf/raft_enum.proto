@@ -2,6 +2,11 @@ syntax = "proto2";
 
 package raft_msg;   
 
+message KVEntry {
+    required string key   = 1;
+    optional string value = 2;
+}
+
 enum JoinRole{
     JoinServer = 0;
     JoinClient = 1;

@@ -18,8 +18,6 @@
 // @@protoc_insertion_point(includes)
 
 namespace raft_msg {
-class CommandRequest_EntryDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<CommandRequest_Entry> {
-} _CommandRequest_Entry_default_instance_;
 class CommandRequestDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<CommandRequest> {
 } _CommandRequest_default_instance_;
 
@@ -28,19 +26,11 @@ namespace protobuf_command_5frequest_2eproto {
 
 namespace {
 
-::google::protobuf::Metadata file_level_metadata[2];
+::google::protobuf::Metadata file_level_metadata[1];
 
 }  // namespace
 
 const ::google::protobuf::uint32 TableStruct::offsets[] = {
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CommandRequest_Entry, _has_bits_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CommandRequest_Entry, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CommandRequest_Entry, key_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CommandRequest_Entry, value_),
-  0,
-  1,
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CommandRequest, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CommandRequest, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -56,12 +46,10 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
 };
 
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
-  { 0, 6, sizeof(CommandRequest_Entry)},
-  { 8, 16, sizeof(CommandRequest)},
+  { 0, 8, sizeof(CommandRequest)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&_CommandRequest_Entry_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_CommandRequest_default_instance_),
 };
 
@@ -83,16 +71,14 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 2);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 1);
 }
 
 }  // namespace
 
 void TableStruct::Shutdown() {
-  _CommandRequest_Entry_default_instance_.Shutdown();
-  delete file_level_metadata[0].reflection;
   _CommandRequest_default_instance_.Shutdown();
-  delete file_level_metadata[1].reflection;
+  delete file_level_metadata[0].reflection;
 }
 
 void TableStruct::InitDefaultsImpl() {
@@ -100,10 +86,9 @@ void TableStruct::InitDefaultsImpl() {
 
   ::google::protobuf::internal::InitProtobufDefaults();
   ::raft_msg::protobuf_raft_5fenum_2eproto::InitDefaults();
-  _CommandRequest_Entry_default_instance_.DefaultConstruct();
   _CommandRequest_default_instance_.DefaultConstruct();
-  _CommandRequest_default_instance_.get_mutable()->command_ = const_cast< ::raft_msg::CommandRequest_Entry*>(
-      ::raft_msg::CommandRequest_Entry::internal_default_instance());
+  _CommandRequest_default_instance_.get_mutable()->command_ = const_cast< ::raft_msg::KVEntry*>(
+      ::raft_msg::KVEntry::internal_default_instance());
 }
 
 void InitDefaults() {
@@ -114,14 +99,13 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
       "\n\025command_request.proto\022\010raft_msg\032\017raft_"
-      "enum.proto\"\267\001\n\016CommandRequest\022\022\n\ncommand"
+      "enum.proto\"\205\001\n\016CommandRequest\022\022\n\ncommand"
       "_id\030\001 \002(\004\022\016\n\006passwd\030\002 \002(\t\022+\n\014command_typ"
-      "e\030\003 \002(\0162\025.raft_msg.CommandType\022/\n\007comman"
-      "d\030\004 \002(\0132\036.raft_msg.CommandRequest.Entry\032"
-      "#\n\005Entry\022\013\n\003key\030\001 \002(\t\022\r\n\005value\030\002 \001(\t"
+      "e\030\003 \002(\0162\025.raft_msg.CommandType\022\"\n\007comman"
+      "d\030\004 \002(\0132\021.raft_msg.KVEntry"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 236);
+      descriptor, 186);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "command_request.proto", &protobuf_RegisterTypes);
   ::raft_msg::protobuf_raft_5fenum_2eproto::AddDescriptors();
@@ -141,444 +125,6 @@ struct StaticDescriptorInitializer {
 
 }  // namespace protobuf_command_5frequest_2eproto
 
-
-// ===================================================================
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int CommandRequest_Entry::kKeyFieldNumber;
-const int CommandRequest_Entry::kValueFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-CommandRequest_Entry::CommandRequest_Entry()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_command_5frequest_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:raft_msg.CommandRequest.Entry)
-}
-CommandRequest_Entry::CommandRequest_Entry(const CommandRequest_Entry& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  key_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_key()) {
-    key_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.key_);
-  }
-  value_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_value()) {
-    value_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.value_);
-  }
-  // @@protoc_insertion_point(copy_constructor:raft_msg.CommandRequest.Entry)
-}
-
-void CommandRequest_Entry::SharedCtor() {
-  _cached_size_ = 0;
-  key_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  value_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-CommandRequest_Entry::~CommandRequest_Entry() {
-  // @@protoc_insertion_point(destructor:raft_msg.CommandRequest.Entry)
-  SharedDtor();
-}
-
-void CommandRequest_Entry::SharedDtor() {
-  key_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  value_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-void CommandRequest_Entry::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* CommandRequest_Entry::descriptor() {
-  protobuf_command_5frequest_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_command_5frequest_2eproto::file_level_metadata[0].descriptor;
-}
-
-const CommandRequest_Entry& CommandRequest_Entry::default_instance() {
-  protobuf_command_5frequest_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
-
-CommandRequest_Entry* CommandRequest_Entry::New(::google::protobuf::Arena* arena) const {
-  CommandRequest_Entry* n = new CommandRequest_Entry;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void CommandRequest_Entry::Clear() {
-// @@protoc_insertion_point(message_clear_start:raft_msg.CommandRequest.Entry)
-  if (_has_bits_[0 / 32] & 3u) {
-    if (has_key()) {
-      GOOGLE_DCHECK(!key_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*key_.UnsafeRawStringPointer())->clear();
-    }
-    if (has_value()) {
-      GOOGLE_DCHECK(!value_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*value_.UnsafeRawStringPointer())->clear();
-    }
-  }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
-}
-
-bool CommandRequest_Entry::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:raft_msg.CommandRequest.Entry)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string key = 1;
-      case 1: {
-        if (tag == 10u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_key()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->key().data(), this->key().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "raft_msg.CommandRequest.Entry.key");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // optional string value = 2;
-      case 2: {
-        if (tag == 18u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_value()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->value().data(), this->value().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "raft_msg.CommandRequest.Entry.value");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:raft_msg.CommandRequest.Entry)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:raft_msg.CommandRequest.Entry)
-  return false;
-#undef DO_
-}
-
-void CommandRequest_Entry::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:raft_msg.CommandRequest.Entry)
-  // required string key = 1;
-  if (has_key()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->key().data(), this->key().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "raft_msg.CommandRequest.Entry.key");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->key(), output);
-  }
-
-  // optional string value = 2;
-  if (has_value()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->value().data(), this->value().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "raft_msg.CommandRequest.Entry.value");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->value(), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:raft_msg.CommandRequest.Entry)
-}
-
-::google::protobuf::uint8* CommandRequest_Entry::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:raft_msg.CommandRequest.Entry)
-  // required string key = 1;
-  if (has_key()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->key().data(), this->key().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "raft_msg.CommandRequest.Entry.key");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->key(), target);
-  }
-
-  // optional string value = 2;
-  if (has_value()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->value().data(), this->value().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "raft_msg.CommandRequest.Entry.value");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->value(), target);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:raft_msg.CommandRequest.Entry)
-  return target;
-}
-
-size_t CommandRequest_Entry::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:raft_msg.CommandRequest.Entry)
-  size_t total_size = 0;
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  // required string key = 1;
-  if (has_key()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->key());
-  }
-  // optional string value = 2;
-  if (has_value()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->value());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void CommandRequest_Entry::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:raft_msg.CommandRequest.Entry)
-  GOOGLE_DCHECK_NE(&from, this);
-  const CommandRequest_Entry* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const CommandRequest_Entry>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:raft_msg.CommandRequest.Entry)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:raft_msg.CommandRequest.Entry)
-    MergeFrom(*source);
-  }
-}
-
-void CommandRequest_Entry::MergeFrom(const CommandRequest_Entry& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:raft_msg.CommandRequest.Entry)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 3u) {
-    if (from.has_key()) {
-      set_has_key();
-      key_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.key_);
-    }
-    if (from.has_value()) {
-      set_has_value();
-      value_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.value_);
-    }
-  }
-}
-
-void CommandRequest_Entry::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:raft_msg.CommandRequest.Entry)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void CommandRequest_Entry::CopyFrom(const CommandRequest_Entry& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:raft_msg.CommandRequest.Entry)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool CommandRequest_Entry::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
-  return true;
-}
-
-void CommandRequest_Entry::Swap(CommandRequest_Entry* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void CommandRequest_Entry::InternalSwap(CommandRequest_Entry* other) {
-  key_.Swap(&other->key_);
-  value_.Swap(&other->value_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata CommandRequest_Entry::GetMetadata() const {
-  protobuf_command_5frequest_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_command_5frequest_2eproto::file_level_metadata[0];
-}
-
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// CommandRequest_Entry
-
-// required string key = 1;
-bool CommandRequest_Entry::has_key() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void CommandRequest_Entry::set_has_key() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void CommandRequest_Entry::clear_has_key() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-void CommandRequest_Entry::clear_key() {
-  key_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_key();
-}
-const ::std::string& CommandRequest_Entry::key() const {
-  // @@protoc_insertion_point(field_get:raft_msg.CommandRequest.Entry.key)
-  return key_.GetNoArena();
-}
-void CommandRequest_Entry::set_key(const ::std::string& value) {
-  set_has_key();
-  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:raft_msg.CommandRequest.Entry.key)
-}
-#if LANG_CXX11
-void CommandRequest_Entry::set_key(::std::string&& value) {
-  set_has_key();
-  key_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:raft_msg.CommandRequest.Entry.key)
-}
-#endif
-void CommandRequest_Entry::set_key(const char* value) {
-  set_has_key();
-  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:raft_msg.CommandRequest.Entry.key)
-}
-void CommandRequest_Entry::set_key(const char* value, size_t size) {
-  set_has_key();
-  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:raft_msg.CommandRequest.Entry.key)
-}
-::std::string* CommandRequest_Entry::mutable_key() {
-  set_has_key();
-  // @@protoc_insertion_point(field_mutable:raft_msg.CommandRequest.Entry.key)
-  return key_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* CommandRequest_Entry::release_key() {
-  // @@protoc_insertion_point(field_release:raft_msg.CommandRequest.Entry.key)
-  clear_has_key();
-  return key_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void CommandRequest_Entry::set_allocated_key(::std::string* key) {
-  if (key != NULL) {
-    set_has_key();
-  } else {
-    clear_has_key();
-  }
-  key_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), key);
-  // @@protoc_insertion_point(field_set_allocated:raft_msg.CommandRequest.Entry.key)
-}
-
-// optional string value = 2;
-bool CommandRequest_Entry::has_value() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void CommandRequest_Entry::set_has_value() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void CommandRequest_Entry::clear_has_value() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-void CommandRequest_Entry::clear_value() {
-  value_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_value();
-}
-const ::std::string& CommandRequest_Entry::value() const {
-  // @@protoc_insertion_point(field_get:raft_msg.CommandRequest.Entry.value)
-  return value_.GetNoArena();
-}
-void CommandRequest_Entry::set_value(const ::std::string& value) {
-  set_has_value();
-  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:raft_msg.CommandRequest.Entry.value)
-}
-#if LANG_CXX11
-void CommandRequest_Entry::set_value(::std::string&& value) {
-  set_has_value();
-  value_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:raft_msg.CommandRequest.Entry.value)
-}
-#endif
-void CommandRequest_Entry::set_value(const char* value) {
-  set_has_value();
-  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:raft_msg.CommandRequest.Entry.value)
-}
-void CommandRequest_Entry::set_value(const char* value, size_t size) {
-  set_has_value();
-  value_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:raft_msg.CommandRequest.Entry.value)
-}
-::std::string* CommandRequest_Entry::mutable_value() {
-  set_has_value();
-  // @@protoc_insertion_point(field_mutable:raft_msg.CommandRequest.Entry.value)
-  return value_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* CommandRequest_Entry::release_value() {
-  // @@protoc_insertion_point(field_release:raft_msg.CommandRequest.Entry.value)
-  clear_has_value();
-  return value_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void CommandRequest_Entry::set_allocated_value(::std::string* value) {
-  if (value != NULL) {
-    set_has_value();
-  } else {
-    clear_has_value();
-  }
-  value_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set_allocated:raft_msg.CommandRequest.Entry.value)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
 
@@ -608,7 +154,7 @@ CommandRequest::CommandRequest(const CommandRequest& from)
     passwd_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.passwd_);
   }
   if (from.has_command()) {
-    command_ = new ::raft_msg::CommandRequest_Entry(*from.command_);
+    command_ = new ::raft_msg::KVEntry(*from.command_);
   } else {
     command_ = NULL;
   }
@@ -644,7 +190,7 @@ void CommandRequest::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* CommandRequest::descriptor() {
   protobuf_command_5frequest_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_command_5frequest_2eproto::file_level_metadata[1].descriptor;
+  return protobuf_command_5frequest_2eproto::file_level_metadata[0].descriptor;
 }
 
 const CommandRequest& CommandRequest::default_instance() {
@@ -669,7 +215,7 @@ void CommandRequest::Clear() {
     }
     if (has_command()) {
       GOOGLE_DCHECK(command_ != NULL);
-      command_->::raft_msg::CommandRequest_Entry::Clear();
+      command_->::raft_msg::KVEntry::Clear();
     }
   }
   if (_has_bits_[0 / 32] & 12u) {
@@ -736,7 +282,7 @@ bool CommandRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // required .raft_msg.CommandRequest.Entry command = 4;
+      // required .raft_msg.KVEntry command = 4;
       case 4: {
         if (tag == 34u) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -793,7 +339,7 @@ void CommandRequest::SerializeWithCachedSizes(
       3, this->command_type(), output);
   }
 
-  // required .raft_msg.CommandRequest.Entry command = 4;
+  // required .raft_msg.KVEntry command = 4;
   if (has_command()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, *this->command_, output);
@@ -832,7 +378,7 @@ void CommandRequest::SerializeWithCachedSizes(
       3, this->command_type(), target);
   }
 
-  // required .raft_msg.CommandRequest.Entry command = 4;
+  // required .raft_msg.KVEntry command = 4;
   if (has_command()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
@@ -859,7 +405,7 @@ size_t CommandRequest::RequiredFieldsByteSizeFallback() const {
   }
 
   if (has_command()) {
-    // required .raft_msg.CommandRequest.Entry command = 4;
+    // required .raft_msg.KVEntry command = 4;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->command_);
@@ -895,7 +441,7 @@ size_t CommandRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->passwd());
 
-    // required .raft_msg.CommandRequest.Entry command = 4;
+    // required .raft_msg.KVEntry command = 4;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->command_);
@@ -944,7 +490,7 @@ void CommandRequest::MergeFrom(const CommandRequest& from) {
       passwd_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.passwd_);
     }
     if (from.has_command()) {
-      mutable_command()->::raft_msg::CommandRequest_Entry::MergeFrom(from.command());
+      mutable_command()->::raft_msg::KVEntry::MergeFrom(from.command());
     }
     if (from.has_command_id()) {
       set_command_id(from.command_id());
@@ -993,7 +539,7 @@ void CommandRequest::InternalSwap(CommandRequest* other) {
 
 ::google::protobuf::Metadata CommandRequest::GetMetadata() const {
   protobuf_command_5frequest_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_command_5frequest_2eproto::file_level_metadata[1];
+  return protobuf_command_5frequest_2eproto::file_level_metadata[0];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -1110,7 +656,7 @@ void CommandRequest::set_command_type(::raft_msg::CommandType value) {
   // @@protoc_insertion_point(field_set:raft_msg.CommandRequest.command_type)
 }
 
-// required .raft_msg.CommandRequest.Entry command = 4;
+// required .raft_msg.KVEntry command = 4;
 bool CommandRequest::has_command() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1121,30 +667,30 @@ void CommandRequest::clear_has_command() {
   _has_bits_[0] &= ~0x00000002u;
 }
 void CommandRequest::clear_command() {
-  if (command_ != NULL) command_->::raft_msg::CommandRequest_Entry::Clear();
+  if (command_ != NULL) command_->::raft_msg::KVEntry::Clear();
   clear_has_command();
 }
-const ::raft_msg::CommandRequest_Entry& CommandRequest::command() const {
+const ::raft_msg::KVEntry& CommandRequest::command() const {
   // @@protoc_insertion_point(field_get:raft_msg.CommandRequest.command)
   return command_ != NULL ? *command_
-                         : *::raft_msg::CommandRequest_Entry::internal_default_instance();
+                         : *::raft_msg::KVEntry::internal_default_instance();
 }
-::raft_msg::CommandRequest_Entry* CommandRequest::mutable_command() {
+::raft_msg::KVEntry* CommandRequest::mutable_command() {
   set_has_command();
   if (command_ == NULL) {
-    command_ = new ::raft_msg::CommandRequest_Entry;
+    command_ = new ::raft_msg::KVEntry;
   }
   // @@protoc_insertion_point(field_mutable:raft_msg.CommandRequest.command)
   return command_;
 }
-::raft_msg::CommandRequest_Entry* CommandRequest::release_command() {
+::raft_msg::KVEntry* CommandRequest::release_command() {
   // @@protoc_insertion_point(field_release:raft_msg.CommandRequest.command)
   clear_has_command();
-  ::raft_msg::CommandRequest_Entry* temp = command_;
+  ::raft_msg::KVEntry* temp = command_;
   command_ = NULL;
   return temp;
 }
-void CommandRequest::set_allocated_command(::raft_msg::CommandRequest_Entry* command) {
+void CommandRequest::set_allocated_command(::raft_msg::KVEntry* command) {
   delete command_;
   command_ = command;
   if (command) {

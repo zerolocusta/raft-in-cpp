@@ -37,9 +37,6 @@ extern AppendEntriesRequestDefaultTypeInternal _AppendEntriesRequest_default_ins
 class LogEntry;
 class LogEntryDefaultTypeInternal;
 extern LogEntryDefaultTypeInternal _LogEntry_default_instance_;
-class LogEntry_Entry;
-class LogEntry_EntryDefaultTypeInternal;
-extern LogEntry_EntryDefaultTypeInternal _LogEntry_Entry_default_instance_;
 }  // namespace raft_msg
 
 namespace raft_msg {

@@ -34,6 +34,9 @@ namespace raft_msg {
 class JoinResponse;
 class JoinResponseDefaultTypeInternal;
 extern JoinResponseDefaultTypeInternal _JoinResponse_default_instance_;
+class KVEntry;
+class KVEntryDefaultTypeInternal;
+extern KVEntryDefaultTypeInternal _KVEntry_default_instance_;
 }  // namespace raft_msg
 
 namespace raft_msg {

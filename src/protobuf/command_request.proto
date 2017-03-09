@@ -9,11 +9,5 @@ message CommandRequest {
     required uint64 command_id = 1;
     required string passwd     = 2;
     required CommandType command_type = 3;
-
-    message Entry {
-        required string key   = 1;
-        optional string value = 2;
-    }
-
-    required Entry command = 4;
+    required KVEntry command = 4;
 }
