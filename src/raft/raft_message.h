@@ -37,7 +37,8 @@ class RaftMessageHandler
 class BaseMessage
 {
   public:
-    virtual ~BaseMessage() = 0;
+    virtual ~BaseMessage() = default;
+    virtual raft_msg::RaftMessage genProtoBufMessage() = 0;
 };
 
 class KVEntryMessage : public BaseMessage
