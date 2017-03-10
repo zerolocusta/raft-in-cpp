@@ -34,7 +34,6 @@
 #include "command_response.pb.h"
 #include "join_request.pb.h"
 #include "join_response.pb.h"
-#include "log_entry.pb.h"
 #include "vote_request.pb.h"
 #include "vote_response.pb.h"
 // @@protoc_insertion_point(includes)
@@ -57,9 +56,6 @@ extern JoinRequestDefaultTypeInternal _JoinRequest_default_instance_;
 class JoinResponse;
 class JoinResponseDefaultTypeInternal;
 extern JoinResponseDefaultTypeInternal _JoinResponse_default_instance_;
-class LogEntry;
-class LogEntryDefaultTypeInternal;
-extern LogEntryDefaultTypeInternal _LogEntry_default_instance_;
 class RaftMessage;
 class RaftMessageDefaultTypeInternal;
 extern RaftMessageDefaultTypeInternal _RaftMessage_default_instance_;
@@ -116,9 +112,8 @@ class RaftMessage : public ::google::protobuf::Message /* @@protoc_insertion_poi
     kCommandResponse = 4,
     kJoinRequest = 5,
     kJoinResponse = 6,
-    kLogEntry = 7,
-    kVoteRequest = 8,
-    kVoteResponse = 9,
+    kVoteRequest = 7,
+    kVoteResponse = 8,
     RAFT_MSG_NOT_SET = 0,
   };
 
@@ -174,6 +169,21 @@ class RaftMessage : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
+  // required string myname = 9;
+  bool has_myname() const;
+  void clear_myname();
+  static const int kMynameFieldNumber = 9;
+  const ::std::string& myname() const;
+  void set_myname(const ::std::string& value);
+  #if LANG_CXX11
+  void set_myname(::std::string&& value);
+  #endif
+  void set_myname(const char* value);
+  void set_myname(const char* value, size_t size);
+  ::std::string* mutable_myname();
+  ::std::string* release_myname();
+  void set_allocated_myname(::std::string* myname);
+
   // optional .raft_msg.AppendEntriesRequest append_entries_request = 1;
   bool has_append_entries_request() const;
   void clear_append_entries_request();
@@ -228,28 +238,19 @@ class RaftMessage : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::raft_msg::JoinResponse* release_join_response();
   void set_allocated_join_response(::raft_msg::JoinResponse* join_response);
 
-  // optional .raft_msg.LogEntry log_entry = 7;
-  bool has_log_entry() const;
-  void clear_log_entry();
-  static const int kLogEntryFieldNumber = 7;
-  const ::raft_msg::LogEntry& log_entry() const;
-  ::raft_msg::LogEntry* mutable_log_entry();
-  ::raft_msg::LogEntry* release_log_entry();
-  void set_allocated_log_entry(::raft_msg::LogEntry* log_entry);
-
-  // optional .raft_msg.VoteRequest vote_request = 8;
+  // optional .raft_msg.VoteRequest vote_request = 7;
   bool has_vote_request() const;
   void clear_vote_request();
-  static const int kVoteRequestFieldNumber = 8;
+  static const int kVoteRequestFieldNumber = 7;
   const ::raft_msg::VoteRequest& vote_request() const;
   ::raft_msg::VoteRequest* mutable_vote_request();
   ::raft_msg::VoteRequest* release_vote_request();
   void set_allocated_vote_request(::raft_msg::VoteRequest* vote_request);
 
-  // optional .raft_msg.VoteResponse vote_response = 9;
+  // optional .raft_msg.VoteResponse vote_response = 8;
   bool has_vote_response() const;
   void clear_vote_response();
-  static const int kVoteResponseFieldNumber = 9;
+  static const int kVoteResponseFieldNumber = 8;
   const ::raft_msg::VoteResponse& vote_response() const;
   ::raft_msg::VoteResponse* mutable_vote_response();
   ::raft_msg::VoteResponse* release_vote_response();
@@ -258,13 +259,14 @@ class RaftMessage : public ::google::protobuf::Message /* @@protoc_insertion_poi
   RaftMsgCase raft_msg_case() const;
   // @@protoc_insertion_point(class_scope:raft_msg.RaftMessage)
  private:
+  void set_has_myname();
+  void clear_has_myname();
   void set_has_append_entries_request();
   void set_has_append_entries_response();
   void set_has_command_request();
   void set_has_command_response();
   void set_has_join_request();
   void set_has_join_response();
-  void set_has_log_entry();
   void set_has_vote_request();
   void set_has_vote_response();
 
@@ -275,6 +277,7 @@ class RaftMessage : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr myname_;
   union RaftMsgUnion {
     RaftMsgUnion() {}
     ::raft_msg::AppendEntriesRequest* append_entries_request_;
@@ -283,7 +286,6 @@ class RaftMessage : public ::google::protobuf::Message /* @@protoc_insertion_poi
     ::raft_msg::CommandResponse* command_response_;
     ::raft_msg::JoinRequest* join_request_;
     ::raft_msg::JoinResponse* join_response_;
-    ::raft_msg::LogEntry* log_entry_;
     ::raft_msg::VoteRequest* vote_request_;
     ::raft_msg::VoteResponse* vote_response_;
   } raft_msg_;
@@ -298,6 +300,68 @@ class RaftMessage : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
 // RaftMessage
+
+// required string myname = 9;
+inline bool RaftMessage::has_myname() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RaftMessage::set_has_myname() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RaftMessage::clear_has_myname() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RaftMessage::clear_myname() {
+  myname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_myname();
+}
+inline const ::std::string& RaftMessage::myname() const {
+  // @@protoc_insertion_point(field_get:raft_msg.RaftMessage.myname)
+  return myname_.GetNoArena();
+}
+inline void RaftMessage::set_myname(const ::std::string& value) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:raft_msg.RaftMessage.myname)
+}
+#if LANG_CXX11
+inline void RaftMessage::set_myname(::std::string&& value) {
+  set_has_myname();
+  myname_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:raft_msg.RaftMessage.myname)
+}
+#endif
+inline void RaftMessage::set_myname(const char* value) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:raft_msg.RaftMessage.myname)
+}
+inline void RaftMessage::set_myname(const char* value, size_t size) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:raft_msg.RaftMessage.myname)
+}
+inline ::std::string* RaftMessage::mutable_myname() {
+  set_has_myname();
+  // @@protoc_insertion_point(field_mutable:raft_msg.RaftMessage.myname)
+  return myname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* RaftMessage::release_myname() {
+  // @@protoc_insertion_point(field_release:raft_msg.RaftMessage.myname)
+  clear_has_myname();
+  return myname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void RaftMessage::set_allocated_myname(::std::string* myname) {
+  if (myname != NULL) {
+    set_has_myname();
+  } else {
+    clear_has_myname();
+  }
+  myname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), myname);
+  // @@protoc_insertion_point(field_set_allocated:raft_msg.RaftMessage.myname)
+}
 
 // optional .raft_msg.AppendEntriesRequest append_entries_request = 1;
 inline bool RaftMessage::has_append_entries_request() const {
@@ -587,55 +651,7 @@ inline void RaftMessage::set_allocated_join_response(::raft_msg::JoinResponse* j
   // @@protoc_insertion_point(field_set_allocated:raft_msg.RaftMessage.join_response)
 }
 
-// optional .raft_msg.LogEntry log_entry = 7;
-inline bool RaftMessage::has_log_entry() const {
-  return raft_msg_case() == kLogEntry;
-}
-inline void RaftMessage::set_has_log_entry() {
-  _oneof_case_[0] = kLogEntry;
-}
-inline void RaftMessage::clear_log_entry() {
-  if (has_log_entry()) {
-    delete raft_msg_.log_entry_;
-    clear_has_raft_msg();
-  }
-}
-inline  const ::raft_msg::LogEntry& RaftMessage::log_entry() const {
-  // @@protoc_insertion_point(field_get:raft_msg.RaftMessage.log_entry)
-  return has_log_entry()
-      ? *raft_msg_.log_entry_
-      : ::raft_msg::LogEntry::default_instance();
-}
-inline ::raft_msg::LogEntry* RaftMessage::mutable_log_entry() {
-  if (!has_log_entry()) {
-    clear_raft_msg();
-    set_has_log_entry();
-    raft_msg_.log_entry_ = new ::raft_msg::LogEntry;
-  }
-  // @@protoc_insertion_point(field_mutable:raft_msg.RaftMessage.log_entry)
-  return raft_msg_.log_entry_;
-}
-inline ::raft_msg::LogEntry* RaftMessage::release_log_entry() {
-  // @@protoc_insertion_point(field_release:raft_msg.RaftMessage.log_entry)
-  if (has_log_entry()) {
-    clear_has_raft_msg();
-    ::raft_msg::LogEntry* temp = raft_msg_.log_entry_;
-    raft_msg_.log_entry_ = NULL;
-    return temp;
-  } else {
-    return NULL;
-  }
-}
-inline void RaftMessage::set_allocated_log_entry(::raft_msg::LogEntry* log_entry) {
-  clear_raft_msg();
-  if (log_entry) {
-    set_has_log_entry();
-    raft_msg_.log_entry_ = log_entry;
-  }
-  // @@protoc_insertion_point(field_set_allocated:raft_msg.RaftMessage.log_entry)
-}
-
-// optional .raft_msg.VoteRequest vote_request = 8;
+// optional .raft_msg.VoteRequest vote_request = 7;
 inline bool RaftMessage::has_vote_request() const {
   return raft_msg_case() == kVoteRequest;
 }
@@ -683,7 +699,7 @@ inline void RaftMessage::set_allocated_vote_request(::raft_msg::VoteRequest* vot
   // @@protoc_insertion_point(field_set_allocated:raft_msg.RaftMessage.vote_request)
 }
 
-// optional .raft_msg.VoteResponse vote_response = 9;
+// optional .raft_msg.VoteResponse vote_response = 8;
 inline bool RaftMessage::has_vote_response() const {
   return raft_msg_case() == kVoteResponse;
 }

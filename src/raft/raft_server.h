@@ -17,7 +17,8 @@ class RaftServer
 
 public:
   explicit RaftServer(boost::asio::io_service &,
-                      const tcp::endpoint &);
+                      const tcp::endpoint &,
+                      const std::string &);
   ~RaftServer();
 
   void DoAccept();

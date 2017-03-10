@@ -13,26 +13,22 @@ public:
 private:
   uint64_t current_index_;
   uint64_t current_term_;
+  uint64_t prev_log_index;
+  uint64_t prev_log_term;
   std::vector<RaftLogEntry> log_;
 };
 
 class RaftLogEntry
 {
 public:
-  RaftLogEntry(
-      const uint64_t,
-      const uint64_t,
-      const CommandType,
-      const std::string &,
-      const std::string &);
+  RaftLogEntry(const uint64_t, const uint64_t, const CommandType, const raft::entry_t &);
 
   ~RaftLogEntry();
 
-  const uint64_t prev_log_index;
-  const uint64_t prev_log_term;
+  uint64_t index;
+  uint64_t term;
   const CommandType command_type;
-  const std::string command_key;
-  const std::string connmad_value;
+  const raft::entry_t entry;
 };
 } // namespace raft
 

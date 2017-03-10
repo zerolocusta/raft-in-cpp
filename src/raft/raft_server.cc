@@ -2,8 +2,10 @@
 
 namespace raft
 {
-RaftServer::RaftServer(boost::asio::io_service &io_service, const tcp_endpoint &endpoint, RaftNode &node) : acceptor_(io_service, endpoint),
-                                                                                                            socket_(io_service),
+RaftServer::RaftServer(boost::asio::io_service &io_service, const tcp_endpoint &endpoint, const std::string &myname)
+    : acceptor_(io_service, endpoint),
+      socket_(io_service),
+      node_(myname, io_service)
 {
     DoAccept();
 }

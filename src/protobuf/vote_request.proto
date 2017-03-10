@@ -6,5 +6,4 @@ message VoteRequest {
 	required uint64 term = 1;
 	required uint64 last_log_index = 2;
 	required uint64 last_log_term  = 3;
-	required string candidate_name = 4;
 }

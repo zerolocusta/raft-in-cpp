@@ -8,11 +8,11 @@ import "command_request.proto";
 import "command_response.proto";
 import "join_request.proto";
 import "join_response.proto";
-import "log_entry.proto";
 import "vote_request.proto";
 import "vote_response.proto";
 
 message RaftMessage {
+    required string myname = 9;
     oneof raft_msg {
         AppendEntriesRequest append_entries_request = 1;
         AppendEntriesResponse append_entries_response = 2;
@@ -20,8 +20,7 @@ message RaftMessage {
         CommandResponse command_response = 4;
         JoinRequest join_request = 5;
         JoinResponse join_response = 6;
-        LogEntry log_entry = 7;
-        VoteRequest vote_request = 8;
-        VoteResponse vote_response = 9;
+        VoteRequest vote_request = 7;
+        VoteResponse vote_response = 8;
     }
 }

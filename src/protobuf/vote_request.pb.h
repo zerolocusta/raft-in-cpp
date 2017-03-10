@@ -125,21 +125,6 @@ class VoteRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // required string candidate_name = 4;
-  bool has_candidate_name() const;
-  void clear_candidate_name();
-  static const int kCandidateNameFieldNumber = 4;
-  const ::std::string& candidate_name() const;
-  void set_candidate_name(const ::std::string& value);
-  #if LANG_CXX11
-  void set_candidate_name(::std::string&& value);
-  #endif
-  void set_candidate_name(const char* value);
-  void set_candidate_name(const char* value, size_t size);
-  ::std::string* mutable_candidate_name();
-  ::std::string* release_candidate_name();
-  void set_allocated_candidate_name(::std::string* candidate_name);
-
   // required uint64 term = 1;
   bool has_term() const;
   void clear_term();
@@ -169,8 +154,6 @@ class VoteRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void clear_has_last_log_index();
   void set_has_last_log_term();
   void clear_has_last_log_term();
-  void set_has_candidate_name();
-  void clear_has_candidate_name();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -178,7 +161,6 @@ class VoteRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr candidate_name_;
   ::google::protobuf::uint64 term_;
   ::google::protobuf::uint64 last_log_index_;
   ::google::protobuf::uint64 last_log_term_;
@@ -194,13 +176,13 @@ class VoteRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
 // required uint64 term = 1;
 inline bool VoteRequest::has_term() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
 inline void VoteRequest::set_has_term() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
 }
 inline void VoteRequest::clear_has_term() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 inline void VoteRequest::clear_term() {
   term_ = GOOGLE_ULONGLONG(0);
@@ -218,13 +200,13 @@ inline void VoteRequest::set_term(::google::protobuf::uint64 value) {
 
 // required uint64 last_log_index = 2;
 inline bool VoteRequest::has_last_log_index() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void VoteRequest::set_has_last_log_index() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void VoteRequest::clear_has_last_log_index() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void VoteRequest::clear_last_log_index() {
   last_log_index_ = GOOGLE_ULONGLONG(0);
@@ -242,13 +224,13 @@ inline void VoteRequest::set_last_log_index(::google::protobuf::uint64 value) {
 
 // required uint64 last_log_term = 3;
 inline bool VoteRequest::has_last_log_term() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void VoteRequest::set_has_last_log_term() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void VoteRequest::clear_has_last_log_term() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void VoteRequest::clear_last_log_term() {
   last_log_term_ = GOOGLE_ULONGLONG(0);
@@ -262,68 +244,6 @@ inline void VoteRequest::set_last_log_term(::google::protobuf::uint64 value) {
   set_has_last_log_term();
   last_log_term_ = value;
   // @@protoc_insertion_point(field_set:raft_msg.VoteRequest.last_log_term)
-}
-
-// required string candidate_name = 4;
-inline bool VoteRequest::has_candidate_name() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void VoteRequest::set_has_candidate_name() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void VoteRequest::clear_has_candidate_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void VoteRequest::clear_candidate_name() {
-  candidate_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_candidate_name();
-}
-inline const ::std::string& VoteRequest::candidate_name() const {
-  // @@protoc_insertion_point(field_get:raft_msg.VoteRequest.candidate_name)
-  return candidate_name_.GetNoArena();
-}
-inline void VoteRequest::set_candidate_name(const ::std::string& value) {
-  set_has_candidate_name();
-  candidate_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:raft_msg.VoteRequest.candidate_name)
-}
-#if LANG_CXX11
-inline void VoteRequest::set_candidate_name(::std::string&& value) {
-  set_has_candidate_name();
-  candidate_name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:raft_msg.VoteRequest.candidate_name)
-}
-#endif
-inline void VoteRequest::set_candidate_name(const char* value) {
-  set_has_candidate_name();
-  candidate_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:raft_msg.VoteRequest.candidate_name)
-}
-inline void VoteRequest::set_candidate_name(const char* value, size_t size) {
-  set_has_candidate_name();
-  candidate_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:raft_msg.VoteRequest.candidate_name)
-}
-inline ::std::string* VoteRequest::mutable_candidate_name() {
-  set_has_candidate_name();
-  // @@protoc_insertion_point(field_mutable:raft_msg.VoteRequest.candidate_name)
-  return candidate_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* VoteRequest::release_candidate_name() {
-  // @@protoc_insertion_point(field_release:raft_msg.VoteRequest.candidate_name)
-  clear_has_candidate_name();
-  return candidate_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void VoteRequest::set_allocated_candidate_name(::std::string* candidate_name) {
-  if (candidate_name != NULL) {
-    set_has_candidate_name();
-  } else {
-    clear_has_candidate_name();
-  }
-  candidate_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), candidate_name);
-  // @@protoc_insertion_point(field_set_allocated:raft_msg.VoteRequest.candidate_name)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS

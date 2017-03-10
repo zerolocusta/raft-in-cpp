@@ -38,15 +38,13 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VoteRequest, term_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VoteRequest, last_log_index_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VoteRequest, last_log_term_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(VoteRequest, candidate_name_),
+  0,
   1,
   2,
-  3,
-  0,
 };
 
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
-  { 0, 8, sizeof(VoteRequest)},
+  { 0, 7, sizeof(VoteRequest)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -95,13 +93,12 @@ void InitDefaults() {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
-      "\n\022vote_request.proto\022\010raft_msg\"b\n\013VoteRe"
+      "\n\022vote_request.proto\022\010raft_msg\"J\n\013VoteRe"
       "quest\022\014\n\004term\030\001 \002(\004\022\026\n\016last_log_index\030\002 "
-      "\002(\004\022\025\n\rlast_log_term\030\003 \002(\004\022\026\n\016candidate_"
-      "name\030\004 \002(\t"
+      "\002(\004\022\025\n\rlast_log_term\030\003 \002(\004"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 130);
+      descriptor, 106);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "vote_request.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
@@ -127,7 +124,6 @@ struct StaticDescriptorInitializer {
 const int VoteRequest::kTermFieldNumber;
 const int VoteRequest::kLastLogIndexFieldNumber;
 const int VoteRequest::kLastLogTermFieldNumber;
-const int VoteRequest::kCandidateNameFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 VoteRequest::VoteRequest()
@@ -144,10 +140,6 @@ VoteRequest::VoteRequest(const VoteRequest& from)
       _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  candidate_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_candidate_name()) {
-    candidate_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.candidate_name_);
-  }
   ::memcpy(&term_, &from.term_,
     reinterpret_cast<char*>(&last_log_term_) -
     reinterpret_cast<char*>(&term_) + sizeof(last_log_term_));
@@ -156,7 +148,6 @@ VoteRequest::VoteRequest(const VoteRequest& from)
 
 void VoteRequest::SharedCtor() {
   _cached_size_ = 0;
-  candidate_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&term_, 0, reinterpret_cast<char*>(&last_log_term_) -
     reinterpret_cast<char*>(&term_) + sizeof(last_log_term_));
 }
@@ -167,7 +158,6 @@ VoteRequest::~VoteRequest() {
 }
 
 void VoteRequest::SharedDtor() {
-  candidate_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void VoteRequest::SetCachedSize(int size) const {
@@ -195,11 +185,7 @@ VoteRequest* VoteRequest::New(::google::protobuf::Arena* arena) const {
 
 void VoteRequest::Clear() {
 // @@protoc_insertion_point(message_clear_start:raft_msg.VoteRequest)
-  if (has_candidate_name()) {
-    GOOGLE_DCHECK(!candidate_name_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*candidate_name_.UnsafeRawStringPointer())->clear();
-  }
-  if (_has_bits_[0 / 32] & 14u) {
+  if (_has_bits_[0 / 32] & 7u) {
     ::memset(&term_, 0, reinterpret_cast<char*>(&last_log_term_) -
       reinterpret_cast<char*>(&term_) + sizeof(last_log_term_));
   }
@@ -256,21 +242,6 @@ bool VoteRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // required string candidate_name = 4;
-      case 4: {
-        if (tag == 34u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_candidate_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->candidate_name().data(), this->candidate_name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "raft_msg.VoteRequest.candidate_name");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
       default: {
       handle_unusual:
         if (tag == 0 ||
@@ -311,16 +282,6 @@ void VoteRequest::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(3, this->last_log_term(), output);
   }
 
-  // required string candidate_name = 4;
-  if (has_candidate_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->candidate_name().data(), this->candidate_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "raft_msg.VoteRequest.candidate_name");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->candidate_name(), output);
-  }
-
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -347,17 +308,6 @@ void VoteRequest::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(3, this->last_log_term(), target);
   }
 
-  // required string candidate_name = 4;
-  if (has_candidate_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->candidate_name().data(), this->candidate_name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "raft_msg.VoteRequest.candidate_name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->candidate_name(), target);
-  }
-
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -369,13 +319,6 @@ void VoteRequest::SerializeWithCachedSizes(
 size_t VoteRequest::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:raft_msg.VoteRequest)
   size_t total_size = 0;
-
-  if (has_candidate_name()) {
-    // required string candidate_name = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->candidate_name());
-  }
 
   if (has_term()) {
     // required uint64 term = 1;
@@ -409,12 +352,7 @@ size_t VoteRequest::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
   }
-  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
-    // required string candidate_name = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->candidate_name());
-
+  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
     // required uint64 term = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
@@ -459,11 +397,7 @@ void VoteRequest::MergeFrom(const VoteRequest& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:raft_msg.VoteRequest)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 15u) {
-    if (from.has_candidate_name()) {
-      set_has_candidate_name();
-      candidate_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.candidate_name_);
-    }
+  if (from._has_bits_[0 / 32] & 7u) {
     if (from.has_term()) {
       set_term(from.term());
     }
@@ -491,7 +425,7 @@ void VoteRequest::CopyFrom(const VoteRequest& from) {
 }
 
 bool VoteRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
   return true;
 }
 
@@ -500,7 +434,6 @@ void VoteRequest::Swap(VoteRequest* other) {
   InternalSwap(other);
 }
 void VoteRequest::InternalSwap(VoteRequest* other) {
-  candidate_name_.Swap(&other->candidate_name_);
   std::swap(term_, other->term_);
   std::swap(last_log_index_, other->last_log_index_);
   std::swap(last_log_term_, other->last_log_term_);
@@ -519,13 +452,13 @@ void VoteRequest::InternalSwap(VoteRequest* other) {
 
 // required uint64 term = 1;
 bool VoteRequest::has_term() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000001u) != 0;
 }
 void VoteRequest::set_has_term() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000001u;
 }
 void VoteRequest::clear_has_term() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000001u;
 }
 void VoteRequest::clear_term() {
   term_ = GOOGLE_ULONGLONG(0);
@@ -543,13 +476,13 @@ void VoteRequest::set_term(::google::protobuf::uint64 value) {
 
 // required uint64 last_log_index = 2;
 bool VoteRequest::has_last_log_index() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 void VoteRequest::set_has_last_log_index() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 void VoteRequest::clear_has_last_log_index() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 void VoteRequest::clear_last_log_index() {
   last_log_index_ = GOOGLE_ULONGLONG(0);
@@ -567,13 +500,13 @@ void VoteRequest::set_last_log_index(::google::protobuf::uint64 value) {
 
 // required uint64 last_log_term = 3;
 bool VoteRequest::has_last_log_term() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 void VoteRequest::set_has_last_log_term() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000004u;
 }
 void VoteRequest::clear_has_last_log_term() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 void VoteRequest::clear_last_log_term() {
   last_log_term_ = GOOGLE_ULONGLONG(0);
@@ -587,68 +520,6 @@ void VoteRequest::set_last_log_term(::google::protobuf::uint64 value) {
   set_has_last_log_term();
   last_log_term_ = value;
   // @@protoc_insertion_point(field_set:raft_msg.VoteRequest.last_log_term)
-}
-
-// required string candidate_name = 4;
-bool VoteRequest::has_candidate_name() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void VoteRequest::set_has_candidate_name() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void VoteRequest::clear_has_candidate_name() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-void VoteRequest::clear_candidate_name() {
-  candidate_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_candidate_name();
-}
-const ::std::string& VoteRequest::candidate_name() const {
-  // @@protoc_insertion_point(field_get:raft_msg.VoteRequest.candidate_name)
-  return candidate_name_.GetNoArena();
-}
-void VoteRequest::set_candidate_name(const ::std::string& value) {
-  set_has_candidate_name();
-  candidate_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:raft_msg.VoteRequest.candidate_name)
-}
-#if LANG_CXX11
-void VoteRequest::set_candidate_name(::std::string&& value) {
-  set_has_candidate_name();
-  candidate_name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:raft_msg.VoteRequest.candidate_name)
-}
-#endif
-void VoteRequest::set_candidate_name(const char* value) {
-  set_has_candidate_name();
-  candidate_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:raft_msg.VoteRequest.candidate_name)
-}
-void VoteRequest::set_candidate_name(const char* value, size_t size) {
-  set_has_candidate_name();
-  candidate_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:raft_msg.VoteRequest.candidate_name)
-}
-::std::string* VoteRequest::mutable_candidate_name() {
-  set_has_candidate_name();
-  // @@protoc_insertion_point(field_mutable:raft_msg.VoteRequest.candidate_name)
-  return candidate_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* VoteRequest::release_candidate_name() {
-  // @@protoc_insertion_point(field_release:raft_msg.VoteRequest.candidate_name)
-  clear_has_candidate_name();
-  return candidate_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void VoteRequest::set_allocated_candidate_name(::std::string* candidate_name) {
-  if (candidate_name != NULL) {
-    set_has_candidate_name();
-  } else {
-    clear_has_candidate_name();
-  }
-  candidate_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), candidate_name);
-  // @@protoc_insertion_point(field_set_allocated:raft_msg.VoteRequest.candidate_name)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

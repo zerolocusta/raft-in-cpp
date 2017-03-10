@@ -8,54 +8,41 @@
 #include <string>
 #include <vector>
 #include <cstdint>
+#include <memory>
 
 namespace raft
 {
-class BaseMessage;
 class KVEntryMessage;
 class LogEntryMessage;
-class RaftMessageHandler;
+class BaseMessage;
 class AppendEntriesRequestMessage;
 class AppendEntriesResponseMessage;
 class CommandRequestMessage;
 class CommandResponseMessage;
 class JoinRequestMessage;
 class JoinResponseMessage;
+class VoteRequestMessage;
+class VoteResponseMessage;
 }
 
 namespace raft
 {
-
-class RaftMessageHandler
-{
-    typedef std::function<void(AppendEntriesResponseMessage &)> handleAppendEntriesRequestMessageFunc_t;
-    typedef std::function<void(AppendEntriesResponseMessage &)> handleAppendEntriesResponseMessageFunc_t;
-    typedef std::function<void(CommandRequestMessage &)> handleCommandRequestMessageFunc_t;
-    typedef std::function<void(CommandResponseMessage &)> handleCommandResponseMessageFunc_t;
-};
-
-class BaseMessage
+class KVEntryMessage
 {
   public:
-    virtual ~BaseMessage() = default;
-    virtual raft_msg::RaftMessage genProtoBufMessage() = 0;
-};
-
-class KVEntryMessage : public BaseMessage
-{
-  public:
-    KVEntryMessage(const std::string &, const std::string &);
+    KVEntryMessage(const raft::entry_t &&);
     KVEntryMessage(const raft_msg::KVEntry &);
+    std::unique_ptr<raft_msg::KVEntryMessage> genProtoBufMessage();
 
-    const std::string key;
-    const std::string value;
+    const raft::entry_t entry;
 };
 
-class LogEntryMessage : public BaseMessage
+class LogEntryMessage
 {
   public:
     LogEntryMessage(const uint64_t, const uint64_t, const raft_msg::CommandType, const KVEntryMessage &);
     LogEntryMessage(const raft_msg::LogEntry &);
+    std::unique_ptr<raft_msg::LogEntryMessage> genProtoBufMessage();
 
     const uint64_t index;
     const uint64_t term;
@@ -63,11 +50,19 @@ class LogEntryMessage : public BaseMessage
     const KVEntryMessage entry;
 };
 
+class BaseMessage
+{
+  public:
+    virtual ~BaseMessage() = default;
+    virtual std::unique_ptr<raft_msg::RaftMessage> genProtoBufMessage() = 0;
+};
+
 class AppendEntriesRequestMessage : public BaseMessage
 {
   public:
     AppendEntriesRequestMessage(const uint64_t, const uint64_t, const uint64_t, const uint64_t, const std::string &, const std::vector<LogEntryMessage> &&);
     AppendEntriesRequestMessage(const raft_msg::AppendEntriesRequest &);
+    std::unique_ptr<raft_msg::RaftMessage> genProtoBufMessage() override;
 
     const uint64_t term;
     const uint64_t prev_log_index;
@@ -82,6 +77,7 @@ class AppendEntriesResponseMessage : public BaseMessage
   public:
     AppendEntriesResponseMessage(const uint64_t, const uint64_t, const uint64_t, const bool);
     AppendEntriesResponseMessage(const raft_msg::AppendEntriesResponse &);
+    std::unique_ptr<raft_msg::RaftMessage> genProtoBufMessage() override;
 
     const uint64_t term;
     const uint64_t current_index;
@@ -93,30 +89,36 @@ class CommandRequestMessage : public BaseMessage
 {
 
   public:
-    CommandRequestMessage(const uint64_t, const std::string &, const raft_msg::CommandType, const raft::entry_t &&);
+    CommandRequestMessage(const uint64_t, const std::string &, const raft_msg::CommandType, const KVEntryMessage &&);
+    CommandRequestMessage(const raft_msg::CommandRequest &);
+    std::unique_ptr<raft_msg::RaftMessage> genProtoBufMessage() override;
 
     const uint64_t command_id;
     const std::string passwd;
     const raft_msg::CommandType command_type;
-    const raft::entry_t connmad_entry;
+    const KVEntryMessage connmad_entry;
 };
 
 class CommandResponseMessage : public BaseMessage
 {
   public:
-    CommandResponseMessage(const uint64_t, const bool, const std::string &, const raft_msg::CommandResponseErr, const raft::entry_t &&);
+    CommandResponseMessage(const uint64_t, const bool, const std::string &, const raft_msg::CommandResponseErr, const KVEntryMessage &&);
+    CommandResponseMessage(const raft_msg::CommandResponse &);
+    std::unique_ptr<raft_msg::RaftMessage> genProtoBufMessage() override;
 
     const uint64_t command_id;
     const bool success;
     const std::string passwd;
     const raft_msg::CommandResponseErr err;
-    const raft::entry_t result;
+    const KVEntryMessage result;
 };
 
 class JoinRequestMessage : public BaseMessage
 {
   public:
     JoinRequestMessage(const raft_msg::JoinRole, const std::string &, const std::string &, const std::string &);
+    JoinRequestMessage(const raft_msg::JoinRequest &);
+    std::unique_ptr<raft_msg::RaftMessage> genProtoBufMessage() override;
 
     const raft_msg::JoinRole role;
     const std::string ipaddr;
@@ -128,11 +130,40 @@ class JoinResponseMessage : public BaseMessage
 {
   public:
     JoinResponseMessage(const bool, const std::string &, const std::string &, const raft_msg::JoinError);
+    JoinResponseMessage(const raft_msg::JoinResponse &);
+
+    std::unique_ptr<raft_msg::RaftMessage> genProtoBufMessage() override;
 
     const bool success;
     const std::string myname;
     const std::string passwd;
     const raft_msg::JoinError join_err;
+};
+
+class VoteRequestMessage : public BaseMessage
+{
+  public:
+    VoteRequestMessage(const uint64_t, const uint64_t, const uint64_t, const std::string);
+    VoteRequestMessage(const raft_msg::VoteRequest &);
+
+    std::unique_ptr<raft_msg::RaftMessage> genProtoBufMessage() override;
+
+    const uint64_t term;
+    const uint64_t last_log_index;
+    const uint64_t last_log_term;
+    const std::string candidate_name;
+};
+
+class VoteResponseMessage : public BaseMessage
+{
+  public:
+    VoteResponseMessage(const uint64_t, const bool);
+    VoteResponseMessage(const raft_msg::VoteResponse &);
+
+    std::unique_ptr<raft_msg::RaftMessage> genProtoBufMessage() override;
+
+    const uint64_t term;
+    const bool vote_granted;
 };
 
 } // namespace raft

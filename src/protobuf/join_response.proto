@@ -6,7 +6,6 @@ import "raft_enum.proto";
 
 message JoinResponse {
     required bool      success    = 1;
-    required string    myname     = 2;
     required string    passwd     = 3;
     optional JoinError join_err   = 4;
 }
