@@ -44,7 +44,6 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RaftMessage, _internal_metadata_),
   ~0u,  // no _extensions_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RaftMessage, _oneof_case_[0]),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RaftMessage, myname_),
   PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET((&_RaftMessage_default_instance_), append_entries_request_),
   PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET((&_RaftMessage_default_instance_), append_entries_response_),
   PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET((&_RaftMessage_default_instance_), command_request_),
@@ -54,7 +53,6 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET((&_RaftMessage_default_instance_), vote_request_),
   PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET((&_RaftMessage_default_instance_), vote_response_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(RaftMessage, raft_msg_),
-  0,
   ~0u,
   ~0u,
   ~0u,
@@ -66,7 +64,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
 };
 
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
-  { 0, 14, sizeof(RaftMessage)},
+  { 0, 13, sizeof(RaftMessage)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -144,22 +142,21 @@ void AddDescriptorsImpl() {
       "e.proto\032\025command_request.proto\032\026command_"
       "response.proto\032\022join_request.proto\032\023join"
       "_response.proto\032\022vote_request.proto\032\023vot"
-      "e_response.proto\"\333\003\n\013RaftMessage\022\016\n\006myna"
-      "me\030\t \002(\t\022@\n\026append_entries_request\030\001 \001(\013"
-      "2\036.raft_msg.AppendEntriesRequestH\000\022B\n\027ap"
-      "pend_entries_response\030\002 \001(\0132\037.raft_msg.A"
-      "ppendEntriesResponseH\000\0223\n\017command_reques"
-      "t\030\003 \001(\0132\030.raft_msg.CommandRequestH\000\0225\n\020c"
-      "ommand_response\030\004 \001(\0132\031.raft_msg.Command"
-      "ResponseH\000\022-\n\014join_request\030\005 \001(\0132\025.raft_"
-      "msg.JoinRequestH\000\022/\n\rjoin_response\030\006 \001(\013"
-      "2\026.raft_msg.JoinResponseH\000\022-\n\014vote_reque"
-      "st\030\007 \001(\0132\025.raft_msg.VoteRequestH\000\022/\n\rvot"
-      "e_response\030\010 \001(\0132\026.raft_msg.VoteResponse"
-      "H\000B\n\n\010raft_msg"
+      "e_response.proto\"\313\003\n\013RaftMessage\022@\n\026appe"
+      "nd_entries_request\030\001 \001(\0132\036.raft_msg.Appe"
+      "ndEntriesRequestH\000\022B\n\027append_entries_res"
+      "ponse\030\002 \001(\0132\037.raft_msg.AppendEntriesResp"
+      "onseH\000\0223\n\017command_request\030\003 \001(\0132\030.raft_m"
+      "sg.CommandRequestH\000\0225\n\020command_response\030"
+      "\004 \001(\0132\031.raft_msg.CommandResponseH\000\022-\n\014jo"
+      "in_request\030\005 \001(\0132\025.raft_msg.JoinRequestH"
+      "\000\022/\n\rjoin_response\030\006 \001(\0132\026.raft_msg.Join"
+      "ResponseH\000\022-\n\014vote_request\030\007 \001(\0132\025.raft_"
+      "msg.VoteRequestH\000\022/\n\rvote_response\030\010 \001(\013"
+      "2\026.raft_msg.VoteResponseH\000B\n\n\010raft_msg"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 694);
+      descriptor, 678);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "raft_msg.proto", &protobuf_RegisterTypes);
   ::raft_msg::protobuf_append_5fentries_5frequest_2eproto::AddDescriptors();
@@ -190,7 +187,6 @@ struct StaticDescriptorInitializer {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int RaftMessage::kMynameFieldNumber;
 const int RaftMessage::kAppendEntriesRequestFieldNumber;
 const int RaftMessage::kAppendEntriesResponseFieldNumber;
 const int RaftMessage::kCommandRequestFieldNumber;
@@ -215,10 +211,6 @@ RaftMessage::RaftMessage(const RaftMessage& from)
       _has_bits_(from._has_bits_),
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  myname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.has_myname()) {
-    myname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.myname_);
-  }
   clear_has_raft_msg();
   switch (from.raft_msg_case()) {
     case kAppendEntriesRequest: {
@@ -262,7 +254,6 @@ RaftMessage::RaftMessage(const RaftMessage& from)
 
 void RaftMessage::SharedCtor() {
   _cached_size_ = 0;
-  myname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   clear_has_raft_msg();
 }
 
@@ -272,7 +263,6 @@ RaftMessage::~RaftMessage() {
 }
 
 void RaftMessage::SharedDtor() {
-  myname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (has_raft_msg()) {
     clear_raft_msg();
   }
@@ -346,10 +336,6 @@ void RaftMessage::clear_raft_msg() {
 
 void RaftMessage::Clear() {
 // @@protoc_insertion_point(message_clear_start:raft_msg.RaftMessage)
-  if (has_myname()) {
-    GOOGLE_DCHECK(!myname_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*myname_.UnsafeRawStringPointer())->clear();
-  }
   clear_raft_msg();
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -453,21 +439,6 @@ bool RaftMessage::MergePartialFromCodedStream(
         break;
       }
 
-      // required string myname = 9;
-      case 9: {
-        if (tag == 74u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_myname()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->myname().data(), this->myname().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "raft_msg.RaftMessage.myname");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
       default: {
       handle_unusual:
         if (tag == 0 ||
@@ -528,16 +499,6 @@ void RaftMessage::SerializeWithCachedSizes(
       break;
     default: ;
   }
-  // required string myname = 9;
-  if (has_myname()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->myname().data(), this->myname().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "raft_msg.RaftMessage.myname");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      9, this->myname(), output);
-  }
-
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -592,17 +553,6 @@ void RaftMessage::SerializeWithCachedSizes(
       break;
     default: ;
   }
-  // required string myname = 9;
-  if (has_myname()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->myname().data(), this->myname().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "raft_msg.RaftMessage.myname");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        9, this->myname(), target);
-  }
-
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -619,12 +569,6 @@ size_t RaftMessage::ByteSizeLong() const {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
-  }
-  // required string myname = 9;
-  if (has_myname()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->myname());
   }
   switch (raft_msg_case()) {
     // optional .raft_msg.AppendEntriesRequest append_entries_request = 1;
@@ -713,10 +657,6 @@ void RaftMessage::MergeFrom(const RaftMessage& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:raft_msg.RaftMessage)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_myname()) {
-    set_has_myname();
-    myname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.myname_);
-  }
   switch (from.raft_msg_case()) {
     case kAppendEntriesRequest: {
       mutable_append_entries_request()->::raft_msg::AppendEntriesRequest::MergeFrom(from.append_entries_request());
@@ -771,7 +711,6 @@ void RaftMessage::CopyFrom(const RaftMessage& from) {
 }
 
 bool RaftMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
   switch (raft_msg_case()) {
     case kAppendEntriesRequest: {
       if (has_append_entries_request()) {
@@ -833,7 +772,6 @@ void RaftMessage::Swap(RaftMessage* other) {
   InternalSwap(other);
 }
 void RaftMessage::InternalSwap(RaftMessage* other) {
-  myname_.Swap(&other->myname_);
   std::swap(raft_msg_, other->raft_msg_);
   std::swap(_oneof_case_[0], other->_oneof_case_[0]);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -848,68 +786,6 @@ void RaftMessage::InternalSwap(RaftMessage* other) {
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // RaftMessage
-
-// required string myname = 9;
-bool RaftMessage::has_myname() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void RaftMessage::set_has_myname() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void RaftMessage::clear_has_myname() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-void RaftMessage::clear_myname() {
-  myname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_myname();
-}
-const ::std::string& RaftMessage::myname() const {
-  // @@protoc_insertion_point(field_get:raft_msg.RaftMessage.myname)
-  return myname_.GetNoArena();
-}
-void RaftMessage::set_myname(const ::std::string& value) {
-  set_has_myname();
-  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:raft_msg.RaftMessage.myname)
-}
-#if LANG_CXX11
-void RaftMessage::set_myname(::std::string&& value) {
-  set_has_myname();
-  myname_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:raft_msg.RaftMessage.myname)
-}
-#endif
-void RaftMessage::set_myname(const char* value) {
-  set_has_myname();
-  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:raft_msg.RaftMessage.myname)
-}
-void RaftMessage::set_myname(const char* value, size_t size) {
-  set_has_myname();
-  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:raft_msg.RaftMessage.myname)
-}
-::std::string* RaftMessage::mutable_myname() {
-  set_has_myname();
-  // @@protoc_insertion_point(field_mutable:raft_msg.RaftMessage.myname)
-  return myname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* RaftMessage::release_myname() {
-  // @@protoc_insertion_point(field_release:raft_msg.RaftMessage.myname)
-  clear_has_myname();
-  return myname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void RaftMessage::set_allocated_myname(::std::string* myname) {
-  if (myname != NULL) {
-    set_has_myname();
-  } else {
-    clear_has_myname();
-  }
-  myname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), myname);
-  // @@protoc_insertion_point(field_set_allocated:raft_msg.RaftMessage.myname)
-}
 
 // optional .raft_msg.AppendEntriesRequest append_entries_request = 1;
 bool RaftMessage::has_append_entries_request() const {

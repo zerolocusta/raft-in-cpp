@@ -10,9 +10,11 @@ namespace raft
 class RaftLog
 {
 public:
+  RaftLog();
 private:
-  uint64_t current_index_;
+  uint64_t commit_index_;
   uint64_t current_term_;
+  uint64_t last_applied;
   uint64_t prev_log_index;
   uint64_t prev_log_term;
   std::vector<RaftLogEntry> log_;

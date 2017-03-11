@@ -1,4 +1,4 @@
-#include "raft_server.h"
+#include "./raft/raft_server.h"
 #include <exception>
 
 int main(int argc, char *argv[])

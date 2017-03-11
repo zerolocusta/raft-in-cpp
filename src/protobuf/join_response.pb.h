@@ -129,10 +129,10 @@ class JoinResponse : public ::google::protobuf::Message /* @@protoc_insertion_po
 
   // accessors -------------------------------------------------------
 
-  // required string passwd = 3;
+  // required string passwd = 2;
   bool has_passwd() const;
   void clear_passwd();
-  static const int kPasswdFieldNumber = 3;
+  static const int kPasswdFieldNumber = 2;
   const ::std::string& passwd() const;
   void set_passwd(const ::std::string& value);
   #if LANG_CXX11
@@ -144,6 +144,21 @@ class JoinResponse : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::std::string* release_passwd();
   void set_allocated_passwd(::std::string* passwd);
 
+  // required string myname = 4;
+  bool has_myname() const;
+  void clear_myname();
+  static const int kMynameFieldNumber = 4;
+  const ::std::string& myname() const;
+  void set_myname(const ::std::string& value);
+  #if LANG_CXX11
+  void set_myname(::std::string&& value);
+  #endif
+  void set_myname(const char* value);
+  void set_myname(const char* value, size_t size);
+  ::std::string* mutable_myname();
+  ::std::string* release_myname();
+  void set_allocated_myname(::std::string* myname);
+
   // required bool success = 1;
   bool has_success() const;
   void clear_success();
@@ -151,10 +166,10 @@ class JoinResponse : public ::google::protobuf::Message /* @@protoc_insertion_po
   bool success() const;
   void set_success(bool value);
 
-  // optional .raft_msg.JoinError join_err = 4;
+  // optional .raft_msg.JoinError join_err = 3;
   bool has_join_err() const;
   void clear_join_err();
-  static const int kJoinErrFieldNumber = 4;
+  static const int kJoinErrFieldNumber = 3;
   ::raft_msg::JoinError join_err() const;
   void set_join_err(::raft_msg::JoinError value);
 
@@ -166,6 +181,8 @@ class JoinResponse : public ::google::protobuf::Message /* @@protoc_insertion_po
   void clear_has_passwd();
   void set_has_join_err();
   void clear_has_join_err();
+  void set_has_myname();
+  void clear_has_myname();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -174,6 +191,7 @@ class JoinResponse : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
   ::google::protobuf::internal::ArenaStringPtr passwd_;
+  ::google::protobuf::internal::ArenaStringPtr myname_;
   bool success_;
   int join_err_;
   friend struct  protobuf_join_5fresponse_2eproto::TableStruct;
@@ -188,13 +206,13 @@ class JoinResponse : public ::google::protobuf::Message /* @@protoc_insertion_po
 
 // required bool success = 1;
 inline bool JoinResponse::has_success() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline void JoinResponse::set_has_success() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 inline void JoinResponse::clear_has_success() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 inline void JoinResponse::clear_success() {
   success_ = false;
@@ -210,7 +228,7 @@ inline void JoinResponse::set_success(bool value) {
   // @@protoc_insertion_point(field_set:raft_msg.JoinResponse.success)
 }
 
-// required string passwd = 3;
+// required string passwd = 2;
 inline bool JoinResponse::has_passwd() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -272,15 +290,15 @@ inline void JoinResponse::set_allocated_passwd(::std::string* passwd) {
   // @@protoc_insertion_point(field_set_allocated:raft_msg.JoinResponse.passwd)
 }
 
-// optional .raft_msg.JoinError join_err = 4;
+// optional .raft_msg.JoinError join_err = 3;
 inline bool JoinResponse::has_join_err() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void JoinResponse::set_has_join_err() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void JoinResponse::clear_has_join_err() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void JoinResponse::clear_join_err() {
   join_err_ = 0;
@@ -295,6 +313,68 @@ inline void JoinResponse::set_join_err(::raft_msg::JoinError value) {
   set_has_join_err();
   join_err_ = value;
   // @@protoc_insertion_point(field_set:raft_msg.JoinResponse.join_err)
+}
+
+// required string myname = 4;
+inline bool JoinResponse::has_myname() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void JoinResponse::set_has_myname() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void JoinResponse::clear_has_myname() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void JoinResponse::clear_myname() {
+  myname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_myname();
+}
+inline const ::std::string& JoinResponse::myname() const {
+  // @@protoc_insertion_point(field_get:raft_msg.JoinResponse.myname)
+  return myname_.GetNoArena();
+}
+inline void JoinResponse::set_myname(const ::std::string& value) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:raft_msg.JoinResponse.myname)
+}
+#if LANG_CXX11
+inline void JoinResponse::set_myname(::std::string&& value) {
+  set_has_myname();
+  myname_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:raft_msg.JoinResponse.myname)
+}
+#endif
+inline void JoinResponse::set_myname(const char* value) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:raft_msg.JoinResponse.myname)
+}
+inline void JoinResponse::set_myname(const char* value, size_t size) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:raft_msg.JoinResponse.myname)
+}
+inline ::std::string* JoinResponse::mutable_myname() {
+  set_has_myname();
+  // @@protoc_insertion_point(field_mutable:raft_msg.JoinResponse.myname)
+  return myname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* JoinResponse::release_myname() {
+  // @@protoc_insertion_point(field_release:raft_msg.JoinResponse.myname)
+  clear_has_myname();
+  return myname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void JoinResponse::set_allocated_myname(::std::string* myname) {
+  if (myname != NULL) {
+    set_has_myname();
+  } else {
+    clear_has_myname();
+  }
+  myname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), myname);
+  // @@protoc_insertion_point(field_set_allocated:raft_msg.JoinResponse.myname)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS

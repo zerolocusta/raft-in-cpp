@@ -159,6 +159,21 @@ class JoinRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_passwd();
   void set_allocated_passwd(::std::string* passwd);
 
+  // required string myname = 4;
+  bool has_myname() const;
+  void clear_myname();
+  static const int kMynameFieldNumber = 4;
+  const ::std::string& myname() const;
+  void set_myname(const ::std::string& value);
+  #if LANG_CXX11
+  void set_myname(::std::string&& value);
+  #endif
+  void set_myname(const char* value);
+  void set_myname(const char* value, size_t size);
+  ::std::string* mutable_myname();
+  ::std::string* release_myname();
+  void set_allocated_myname(::std::string* myname);
+
   // required .raft_msg.JoinRole role = 1;
   bool has_role() const;
   void clear_role();
@@ -174,6 +189,8 @@ class JoinRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void clear_has_ipaddr();
   void set_has_passwd();
   void clear_has_passwd();
+  void set_has_myname();
+  void clear_has_myname();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -183,6 +200,7 @@ class JoinRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
   mutable int _cached_size_;
   ::google::protobuf::internal::ArenaStringPtr ipaddr_;
   ::google::protobuf::internal::ArenaStringPtr passwd_;
+  ::google::protobuf::internal::ArenaStringPtr myname_;
   int role_;
   friend struct  protobuf_join_5frequest_2eproto::TableStruct;
 };
@@ -196,13 +214,13 @@ class JoinRequest : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
 // required .raft_msg.JoinRole role = 1;
 inline bool JoinRequest::has_role() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void JoinRequest::set_has_role() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 inline void JoinRequest::clear_has_role() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void JoinRequest::clear_role() {
   role_ = 0;
@@ -341,6 +359,68 @@ inline void JoinRequest::set_allocated_passwd(::std::string* passwd) {
   }
   passwd_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), passwd);
   // @@protoc_insertion_point(field_set_allocated:raft_msg.JoinRequest.passwd)
+}
+
+// required string myname = 4;
+inline bool JoinRequest::has_myname() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void JoinRequest::set_has_myname() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void JoinRequest::clear_has_myname() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void JoinRequest::clear_myname() {
+  myname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_myname();
+}
+inline const ::std::string& JoinRequest::myname() const {
+  // @@protoc_insertion_point(field_get:raft_msg.JoinRequest.myname)
+  return myname_.GetNoArena();
+}
+inline void JoinRequest::set_myname(const ::std::string& value) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:raft_msg.JoinRequest.myname)
+}
+#if LANG_CXX11
+inline void JoinRequest::set_myname(::std::string&& value) {
+  set_has_myname();
+  myname_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:raft_msg.JoinRequest.myname)
+}
+#endif
+inline void JoinRequest::set_myname(const char* value) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:raft_msg.JoinRequest.myname)
+}
+inline void JoinRequest::set_myname(const char* value, size_t size) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:raft_msg.JoinRequest.myname)
+}
+inline ::std::string* JoinRequest::mutable_myname() {
+  set_has_myname();
+  // @@protoc_insertion_point(field_mutable:raft_msg.JoinRequest.myname)
+  return myname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* JoinRequest::release_myname() {
+  // @@protoc_insertion_point(field_release:raft_msg.JoinRequest.myname)
+  clear_has_myname();
+  return myname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void JoinRequest::set_allocated_myname(::std::string* myname) {
+  if (myname != NULL) {
+    set_has_myname();
+  } else {
+    clear_has_myname();
+  }
+  myname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), myname);
+  // @@protoc_insertion_point(field_set_allocated:raft_msg.JoinRequest.myname)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS

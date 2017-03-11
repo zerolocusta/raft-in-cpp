@@ -12,7 +12,6 @@ import "vote_request.proto";
 import "vote_response.proto";
 
 message RaftMessage {
-    required string myname = 9;
     oneof raft_msg {
         AppendEntriesRequest append_entries_request = 1;
         AppendEntriesResponse append_entries_response = 2;

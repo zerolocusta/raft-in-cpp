@@ -7,10 +7,13 @@ KVEntryMessage::KVEntryMessage(const raft::entry_t &entry) : entry(entry) {}
 KVEntryMessage::KVEntryMessage(const raft::entry_t &entry) : entry(entry) {}
 
 
-std::unique_ptr<raft_msg::RaftMessage> KVEntryMessage::genProtoBufMessage(){
+raft_msg::KVEntryMessage KVEntryMessage::genProtoBufMessage(){
     
-    auto p =  std::make_unique<raft_msg::RaftMessage>()
-    p->set_
+    auto kv_entry = raft_msg::KVEntry();
+    kv_entry.set_key(entry.first);
+    kv_entry.set_value(entry.second);
+    return kv_entry;
+    
     
 }
 

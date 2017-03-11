@@ -169,21 +169,6 @@ class RaftMessage : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // required string myname = 9;
-  bool has_myname() const;
-  void clear_myname();
-  static const int kMynameFieldNumber = 9;
-  const ::std::string& myname() const;
-  void set_myname(const ::std::string& value);
-  #if LANG_CXX11
-  void set_myname(::std::string&& value);
-  #endif
-  void set_myname(const char* value);
-  void set_myname(const char* value, size_t size);
-  ::std::string* mutable_myname();
-  ::std::string* release_myname();
-  void set_allocated_myname(::std::string* myname);
-
   // optional .raft_msg.AppendEntriesRequest append_entries_request = 1;
   bool has_append_entries_request() const;
   void clear_append_entries_request();
@@ -259,8 +244,6 @@ class RaftMessage : public ::google::protobuf::Message /* @@protoc_insertion_poi
   RaftMsgCase raft_msg_case() const;
   // @@protoc_insertion_point(class_scope:raft_msg.RaftMessage)
  private:
-  void set_has_myname();
-  void clear_has_myname();
   void set_has_append_entries_request();
   void set_has_append_entries_response();
   void set_has_command_request();
@@ -277,7 +260,6 @@ class RaftMessage : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::HasBits<1> _has_bits_;
   mutable int _cached_size_;
-  ::google::protobuf::internal::ArenaStringPtr myname_;
   union RaftMsgUnion {
     RaftMsgUnion() {}
     ::raft_msg::AppendEntriesRequest* append_entries_request_;
@@ -300,68 +282,6 @@ class RaftMessage : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
 // RaftMessage
-
-// required string myname = 9;
-inline bool RaftMessage::has_myname() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void RaftMessage::set_has_myname() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void RaftMessage::clear_has_myname() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void RaftMessage::clear_myname() {
-  myname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_myname();
-}
-inline const ::std::string& RaftMessage::myname() const {
-  // @@protoc_insertion_point(field_get:raft_msg.RaftMessage.myname)
-  return myname_.GetNoArena();
-}
-inline void RaftMessage::set_myname(const ::std::string& value) {
-  set_has_myname();
-  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:raft_msg.RaftMessage.myname)
-}
-#if LANG_CXX11
-inline void RaftMessage::set_myname(::std::string&& value) {
-  set_has_myname();
-  myname_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:raft_msg.RaftMessage.myname)
-}
-#endif
-inline void RaftMessage::set_myname(const char* value) {
-  set_has_myname();
-  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:raft_msg.RaftMessage.myname)
-}
-inline void RaftMessage::set_myname(const char* value, size_t size) {
-  set_has_myname();
-  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:raft_msg.RaftMessage.myname)
-}
-inline ::std::string* RaftMessage::mutable_myname() {
-  set_has_myname();
-  // @@protoc_insertion_point(field_mutable:raft_msg.RaftMessage.myname)
-  return myname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* RaftMessage::release_myname() {
-  // @@protoc_insertion_point(field_release:raft_msg.RaftMessage.myname)
-  clear_has_myname();
-  return myname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void RaftMessage::set_allocated_myname(::std::string* myname) {
-  if (myname != NULL) {
-    set_has_myname();
-  } else {
-    clear_has_myname();
-  }
-  myname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), myname);
-  // @@protoc_insertion_point(field_set_allocated:raft_msg.RaftMessage.myname)
-}
 
 // optional .raft_msg.AppendEntriesRequest append_entries_request = 1;
 inline bool RaftMessage::has_append_entries_request() const {

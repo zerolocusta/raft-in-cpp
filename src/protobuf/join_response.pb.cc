@@ -38,13 +38,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponse, success_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponse, passwd_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponse, join_err_),
-  1,
-  0,
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponse, myname_),
   2,
+  0,
+  3,
+  1,
 };
 
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
-  { 0, 7, sizeof(JoinResponse)},
+  { 0, 8, sizeof(JoinResponse)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -95,12 +97,12 @@ void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
       "\n\023join_response.proto\022\010raft_msg\032\017raft_en"
-      "um.proto\"V\n\014JoinResponse\022\017\n\007success\030\001 \002("
-      "\010\022\016\n\006passwd\030\003 \002(\t\022%\n\010join_err\030\004 \001(\0162\023.ra"
-      "ft_msg.JoinError"
+      "um.proto\"f\n\014JoinResponse\022\017\n\007success\030\001 \002("
+      "\010\022\016\n\006passwd\030\002 \002(\t\022%\n\010join_err\030\003 \001(\0162\023.ra"
+      "ft_msg.JoinError\022\016\n\006myname\030\004 \002(\t"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 136);
+      descriptor, 152);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "join_response.proto", &protobuf_RegisterTypes);
   ::raft_msg::protobuf_raft_5fenum_2eproto::AddDescriptors();
@@ -127,6 +129,7 @@ struct StaticDescriptorInitializer {
 const int JoinResponse::kSuccessFieldNumber;
 const int JoinResponse::kPasswdFieldNumber;
 const int JoinResponse::kJoinErrFieldNumber;
+const int JoinResponse::kMynameFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 JoinResponse::JoinResponse()
@@ -147,6 +150,10 @@ JoinResponse::JoinResponse(const JoinResponse& from)
   if (from.has_passwd()) {
     passwd_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.passwd_);
   }
+  myname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_myname()) {
+    myname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.myname_);
+  }
   ::memcpy(&success_, &from.success_,
     reinterpret_cast<char*>(&join_err_) -
     reinterpret_cast<char*>(&success_) + sizeof(join_err_));
@@ -156,6 +163,7 @@ JoinResponse::JoinResponse(const JoinResponse& from)
 void JoinResponse::SharedCtor() {
   _cached_size_ = 0;
   passwd_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  myname_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&success_, 0, reinterpret_cast<char*>(&join_err_) -
     reinterpret_cast<char*>(&success_) + sizeof(join_err_));
 }
@@ -167,6 +175,7 @@ JoinResponse::~JoinResponse() {
 
 void JoinResponse::SharedDtor() {
   passwd_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  myname_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void JoinResponse::SetCachedSize(int size) const {
@@ -194,11 +203,17 @@ JoinResponse* JoinResponse::New(::google::protobuf::Arena* arena) const {
 
 void JoinResponse::Clear() {
 // @@protoc_insertion_point(message_clear_start:raft_msg.JoinResponse)
-  if (has_passwd()) {
-    GOOGLE_DCHECK(!passwd_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-    (*passwd_.UnsafeRawStringPointer())->clear();
+  if (_has_bits_[0 / 32] & 3u) {
+    if (has_passwd()) {
+      GOOGLE_DCHECK(!passwd_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*passwd_.UnsafeRawStringPointer())->clear();
+    }
+    if (has_myname()) {
+      GOOGLE_DCHECK(!myname_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
+      (*myname_.UnsafeRawStringPointer())->clear();
+    }
   }
-  if (_has_bits_[0 / 32] & 6u) {
+  if (_has_bits_[0 / 32] & 12u) {
     ::memset(&success_, 0, reinterpret_cast<char*>(&join_err_) -
       reinterpret_cast<char*>(&success_) + sizeof(join_err_));
   }
@@ -229,9 +244,9 @@ bool JoinResponse::MergePartialFromCodedStream(
         break;
       }
 
-      // required string passwd = 3;
-      case 3: {
-        if (tag == 26u) {
+      // required string passwd = 2;
+      case 2: {
+        if (tag == 18u) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_passwd()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -244,9 +259,9 @@ bool JoinResponse::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .raft_msg.JoinError join_err = 4;
-      case 4: {
-        if (tag == 32u) {
+      // optional .raft_msg.JoinError join_err = 3;
+      case 3: {
+        if (tag == 24u) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
@@ -254,8 +269,23 @@ bool JoinResponse::MergePartialFromCodedStream(
           if (::raft_msg::JoinError_IsValid(value)) {
             set_join_err(static_cast< ::raft_msg::JoinError >(value));
           } else {
-            mutable_unknown_fields()->AddVarint(4, value);
+            mutable_unknown_fields()->AddVarint(3, value);
           }
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required string myname = 4;
+      case 4: {
+        if (tag == 34u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_myname()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->myname().data(), this->myname().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "raft_msg.JoinResponse.myname");
         } else {
           goto handle_unusual;
         }
@@ -292,20 +322,30 @@ void JoinResponse::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->success(), output);
   }
 
-  // required string passwd = 3;
+  // required string passwd = 2;
   if (has_passwd()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->passwd().data(), this->passwd().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "raft_msg.JoinResponse.passwd");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->passwd(), output);
+      2, this->passwd(), output);
   }
 
-  // optional .raft_msg.JoinError join_err = 4;
+  // optional .raft_msg.JoinError join_err = 3;
   if (has_join_err()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      4, this->join_err(), output);
+      3, this->join_err(), output);
+  }
+
+  // required string myname = 4;
+  if (has_myname()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->myname().data(), this->myname().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "raft_msg.JoinResponse.myname");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->myname(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -324,7 +364,7 @@ void JoinResponse::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->success(), target);
   }
 
-  // required string passwd = 3;
+  // required string passwd = 2;
   if (has_passwd()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->passwd().data(), this->passwd().length(),
@@ -332,13 +372,24 @@ void JoinResponse::SerializeWithCachedSizes(
       "raft_msg.JoinResponse.passwd");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->passwd(), target);
+        2, this->passwd(), target);
   }
 
-  // optional .raft_msg.JoinError join_err = 4;
+  // optional .raft_msg.JoinError join_err = 3;
   if (has_join_err()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      4, this->join_err(), target);
+      3, this->join_err(), target);
+  }
+
+  // required string myname = 4;
+  if (has_myname()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->myname().data(), this->myname().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "raft_msg.JoinResponse.myname");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->myname(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -354,10 +405,17 @@ size_t JoinResponse::RequiredFieldsByteSizeFallback() const {
   size_t total_size = 0;
 
   if (has_passwd()) {
-    // required string passwd = 3;
+    // required string passwd = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->passwd());
+  }
+
+  if (has_myname()) {
+    // required string myname = 4;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->myname());
   }
 
   if (has_success()) {
@@ -376,11 +434,16 @@ size_t JoinResponse::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
   }
-  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required string passwd = 3;
+  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
+    // required string passwd = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->passwd());
+
+    // required string myname = 4;
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->myname());
 
     // required bool success = 1;
     total_size += 1 + 1;
@@ -388,7 +451,7 @@ size_t JoinResponse::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  // optional .raft_msg.JoinError join_err = 4;
+  // optional .raft_msg.JoinError join_err = 3;
   if (has_join_err()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->join_err());
@@ -420,10 +483,14 @@ void JoinResponse::MergeFrom(const JoinResponse& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:raft_msg.JoinResponse)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 7u) {
+  if (from._has_bits_[0 / 32] & 15u) {
     if (from.has_passwd()) {
       set_has_passwd();
       passwd_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.passwd_);
+    }
+    if (from.has_myname()) {
+      set_has_myname();
+      myname_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.myname_);
     }
     if (from.has_success()) {
       set_success(from.success());
@@ -449,7 +516,7 @@ void JoinResponse::CopyFrom(const JoinResponse& from) {
 }
 
 bool JoinResponse::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
   return true;
 }
 
@@ -459,6 +526,7 @@ void JoinResponse::Swap(JoinResponse* other) {
 }
 void JoinResponse::InternalSwap(JoinResponse* other) {
   passwd_.Swap(&other->passwd_);
+  myname_.Swap(&other->myname_);
   std::swap(success_, other->success_);
   std::swap(join_err_, other->join_err_);
   std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -476,13 +544,13 @@ void JoinResponse::InternalSwap(JoinResponse* other) {
 
 // required bool success = 1;
 bool JoinResponse::has_success() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 void JoinResponse::set_has_success() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
 }
 void JoinResponse::clear_has_success() {
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
 }
 void JoinResponse::clear_success() {
   success_ = false;
@@ -498,7 +566,7 @@ void JoinResponse::set_success(bool value) {
   // @@protoc_insertion_point(field_set:raft_msg.JoinResponse.success)
 }
 
-// required string passwd = 3;
+// required string passwd = 2;
 bool JoinResponse::has_passwd() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -560,15 +628,15 @@ void JoinResponse::set_allocated_passwd(::std::string* passwd) {
   // @@protoc_insertion_point(field_set_allocated:raft_msg.JoinResponse.passwd)
 }
 
-// optional .raft_msg.JoinError join_err = 4;
+// optional .raft_msg.JoinError join_err = 3;
 bool JoinResponse::has_join_err() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 void JoinResponse::set_has_join_err() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
 }
 void JoinResponse::clear_has_join_err() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 void JoinResponse::clear_join_err() {
   join_err_ = 0;
@@ -583,6 +651,68 @@ void JoinResponse::set_join_err(::raft_msg::JoinError value) {
   set_has_join_err();
   join_err_ = value;
   // @@protoc_insertion_point(field_set:raft_msg.JoinResponse.join_err)
+}
+
+// required string myname = 4;
+bool JoinResponse::has_myname() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void JoinResponse::set_has_myname() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void JoinResponse::clear_has_myname() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void JoinResponse::clear_myname() {
+  myname_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_myname();
+}
+const ::std::string& JoinResponse::myname() const {
+  // @@protoc_insertion_point(field_get:raft_msg.JoinResponse.myname)
+  return myname_.GetNoArena();
+}
+void JoinResponse::set_myname(const ::std::string& value) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:raft_msg.JoinResponse.myname)
+}
+#if LANG_CXX11
+void JoinResponse::set_myname(::std::string&& value) {
+  set_has_myname();
+  myname_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:raft_msg.JoinResponse.myname)
+}
+#endif
+void JoinResponse::set_myname(const char* value) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:raft_msg.JoinResponse.myname)
+}
+void JoinResponse::set_myname(const char* value, size_t size) {
+  set_has_myname();
+  myname_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:raft_msg.JoinResponse.myname)
+}
+::std::string* JoinResponse::mutable_myname() {
+  set_has_myname();
+  // @@protoc_insertion_point(field_mutable:raft_msg.JoinResponse.myname)
+  return myname_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* JoinResponse::release_myname() {
+  // @@protoc_insertion_point(field_release:raft_msg.JoinResponse.myname)
+  clear_has_myname();
+  return myname_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void JoinResponse::set_allocated_myname(::std::string* myname) {
+  if (myname != NULL) {
+    set_has_myname();
+  } else {
+    clear_has_myname();
+  }
+  myname_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), myname);
+  // @@protoc_insertion_point(field_set_allocated:raft_msg.JoinResponse.myname)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

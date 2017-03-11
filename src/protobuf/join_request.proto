@@ -8,4 +8,6 @@ message JoinRequest {
   required JoinRole role = 1;
   required string ipaddr = 2;
   required string passwd = 3;
+  required string myname = 4;
+
 }
