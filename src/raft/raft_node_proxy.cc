@@ -1,5 +1,7 @@
-#include "raft_node.h"
+#include <functional>
 #include "raft.h"
+#include "raft_node_proxy.h"
+
 namespace raft
 {
 RaftNodeProxy::RaftNodeProxy(raftServerPtr_t server_ptr, const std::string &myname, boost::asio::io_service &io_service)

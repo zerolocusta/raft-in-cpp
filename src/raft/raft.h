@@ -2,11 +2,17 @@
 #define RAFT_IN_CPP_RAFR_H
 #include <utility>
 #include <raft_message.h>
+#include "raft_message.h"
+#include "../protobuf/raft_msg.pb.h"
 namespace raft
 {
 typedef std::string key_t;
 typedef std::string value_t;
 typedef std::pair<key_t, value_t> entry_t;
+
+typedef std::shared_ptr<raft_msg::KVEntry> KVEntryPtr_t;
+typedef std::shared_ptr<raft_msg::LogEntry> LogEntryPtr_t;
+typedef std::shared_ptr<raft_msg::RaftMessage> RaftMessagePtr_t;
 
 // handle Message callback function type
 typedef std::function<void(BaseMessage &)> handleBaseMessageMessageFunc_t;
@@ -36,7 +42,6 @@ enum RAFT_STATE
 };
 
 int genRandomHeartBeatTime();
-
 }
 
 #endif // RAFT_IN_CPP_RAFR_H

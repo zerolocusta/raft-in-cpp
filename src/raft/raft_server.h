@@ -3,13 +3,15 @@
 
 #include "raft.h"
 #include "raft_log.h"
-#include "raft_node.h"
 
 #include "boost/date_time/posix_time/posix_time.hpp"
+#include "raft_node_proxy.h"
 
 #include <set>
+#include <utility>
 #include <memory>
 #include <boost/asio.hpp>
+#include <map>
 
 using boost::asio::ip::tcp;
 
@@ -28,10 +30,11 @@ public:
                       const std::string &);
   ~RaftServer();
 
-
 private:
-
   void connectTo();
+  void handleConnection(tcp::socket &&s);
+  void setTimerFromNow(boost::posix_time::ptime deadline, std::function<void()>);
+
   void doAccept();
 
   void setTimerFromNow(const std::string &, boost::posix_time::ptime, std::function<void()>);
@@ -39,28 +42,28 @@ private:
   void setFollowerTimer();
   void setCandidateTimer();
 
-  void becomeCandidate();
+  std::function<void()> becomeCandidate();
   void becomeFollower();
 
   //Boost.asio member
   boost::asio::io_service io_service_;
+  tcp::socket socket_;
   tcp::acceptor acceptor_;
 
   std::map<std::string, RaftNodeProxyPtr_t> all_node_proxy;
-
   std::string my_name_;
   raft::RAFT_STATE state_;
   raft::RaftLog raft_log_;
 
   // become candidate, count vote granted
   uint64_t voted_count_;
-  
+
   // receive request vote or become candidate, did this node voted;
   bool voted_;
   std::string voted_for_;
 
-    // for save key-value pair
-  std::map<string, string> kv_record;
+  // for save key-value pair
+  std::map<std::string, std::string> kv_record;
 };
 } // namespace raft
 

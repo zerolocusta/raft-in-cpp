@@ -11,25 +11,29 @@ class RaftLog
 {
 public:
   RaftLog();
+
+  RaftLog(uint64_t commit_index_, uint64_t current_term_, uint64_t last_applied, uint64_t prev_log_index_,
+          uint64_t prev_log_term_, const std::vector<RaftLogEntry> &log_);
+
 private:
   uint64_t commit_index_;
   uint64_t current_term_;
   uint64_t last_applied;
-  uint64_t prev_log_index;
-  uint64_t prev_log_term;
-  std::vector<RaftLogEntry> log_;
+  uint64_t prev_log_index_;
+  uint64_t prev_log_term_;
+  std::vector<RaftLogEntry> logs_;
 };
 
 class RaftLogEntry
 {
 public:
-  RaftLogEntry(const uint64_t, const uint64_t, const CommandType, const raft::entry_t &);
+  RaftLogEntry(const uint64_t, const uint64_t, const raft_msg::CommandType, const raft::entry_t &);
 
   ~RaftLogEntry();
 
   uint64_t index;
   uint64_t term;
-  const CommandType command_type;
+  const raft_msg::CommandType command_type;
   const raft::entry_t entry;
 };
 } // namespace raft

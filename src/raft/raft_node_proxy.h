@@ -13,8 +13,9 @@ namespace raft
 class RaftNodeProxy
 {
   typedef std::shared_ptr<raft::RaftServer> raftServerPtr_t;
+
 public:
-  RaftNodeProxy(raftServerPtr_t ,const std::string &, boost::asio::io_service &, tcp::socket &&socket){};
+  RaftNodeProxy(raftServerPtr_t, const std::string &, boost::asio::io_service &, tcp::socket &&socket){};
   ~RaftNodeProxy(){};
 
 private:

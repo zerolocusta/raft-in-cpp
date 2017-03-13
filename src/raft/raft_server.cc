@@ -2,11 +2,12 @@
 
 namespace raft
 {
-RaftServer::RaftServer(boost::asio::io_service &io_service, const tcp_endpoint &endpoint, const std::string &myname)
+RaftServer::RaftServer(boost::asio::io_service &io_service, const tcp::endpoint &endpoint, const std::string &my_name)
     : io_service_(io_service),
+      socket_(io_service),
       acceptor_(io_service, endpoint),
-      my_name(my_name),
-      state_(raft::RAFT_STATE::RAFT_STATE_FOLLOWER),
+      my_name_(my_name),
+      state_(raft::RAFT_STATE::RAFT_STATE_FOLLOWER)
 {
     // TODO:  connectTo() or doAccept();
     // becomeFollower();
@@ -40,13 +41,13 @@ void RaftServer::setTimerFromNow(boost::posix_time::ptime deadline, std::functio
 
 void RaftServer::setFollowerTimer()
 {
-    setTimerFromNow(name, boost::posix_time::milliseconds(genRandomHeartBeatTime()),
+    setTimerFromNow(boost::posix_time::milliseconds(genRandomHeartBeatTime()),
                     this->becomeCandidate);
 }
 
 void RaftServer::setCandidateTimer()
 {
-    setTimerFromNow(name, boost::posix_time::milliseconds(ELECTION_TIMEOUT),
+    setTimerFromNow(boost::posix_time::milliseconds(ELECTION_TIMEOUT),
                     this->becomeCandidate);
 }
 } // namespace raft
