@@ -33,20 +33,20 @@ public:
 private:
   void connectTo();
   void handleConnection(tcp::socket &&s);
-  void setTimerFromNow(boost::posix_time::ptime deadline, std::function<void()>);
 
   void doAccept();
 
-  void setTimerFromNow(const std::string &, boost::posix_time::ptime, std::function<void()>);
   // set hearrtbear timer for this server
-  void setFollowerTimer();
+  void setTimerFromNow(boost::posix_time::milliseconds, std::function<void()>);
+    void setFollowerTimer();
   void setCandidateTimer();
 
-  std::function<void()> becomeCandidate();
+  void becomeCandidate();
   void becomeFollower();
 
   //Boost.asio member
   boost::asio::io_service io_service_;
+    boost::asio::deadline_timer timer_;
   tcp::socket socket_;
   tcp::acceptor acceptor_;
 
@@ -64,6 +64,7 @@ private:
 
   // for save key-value pair
   std::map<std::string, std::string> kv_record;
+
 };
 } // namespace raft
 

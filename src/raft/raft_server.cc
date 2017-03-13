@@ -7,7 +7,8 @@ RaftServer::RaftServer(boost::asio::io_service &io_service, const tcp::endpoint 
       socket_(io_service),
       acceptor_(io_service, endpoint),
       my_name_(my_name),
-      state_(raft::RAFT_STATE::RAFT_STATE_FOLLOWER)
+      state_(raft::RAFT_STATE::RAFT_STATE_FOLLOWER),
+      timer_(io_service)
 {
     // TODO:  connectTo() or doAccept();
     // becomeFollower();
@@ -32,22 +33,25 @@ void RaftServer::handleConnection(tcp::socket &&socket)
     all_node_proxy[<TODO>] = node_proxy_ptr;
 }
 
-void RaftServer::setTimerFromNow(boost::posix_time::ptime deadline, std::function<void()> timeout_handler)
+void RaftServer::setTimerFromNow(boost::posix_time::milliseconds deadline_ms_from_now, std::function<void()> timeout_handler)
 {
-    timer = boost::asio::deadline_timer(io_service_);
-    timer.expires_from_now(deadline);
-    timer.asynv_wait(timeout_handler);
+    timer_.expires_from_now(deadline_ms_from_now);
+    timer_.async_wait(timeout_handler);
 }
 
 void RaftServer::setFollowerTimer()
 {
     setTimerFromNow(boost::posix_time::milliseconds(genRandomHeartBeatTime()),
-                    this->becomeCandidate);
+                    [this](){this->becomeCandidate();});
 }
 
 void RaftServer::setCandidateTimer()
 {
     setTimerFromNow(boost::posix_time::milliseconds(ELECTION_TIMEOUT),
-                    this->becomeCandidate);
+                    [this](){this->becomeCandidate();});
 }
+
+    void RaftServer::connectTo() {
+
+    }
 } // namespace raft

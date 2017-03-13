@@ -11,4 +11,7 @@ RaftLog::RaftLog() : commit_index_(0),
 {
 }
 
+    RaftLogEntry::RaftLogEntry(const uint64_t, const uint64_t, const raft_msg::CommandType, const raft::entry_t &) {
+
+    }
 } // namespace raft

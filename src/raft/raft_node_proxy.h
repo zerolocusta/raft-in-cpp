@@ -5,6 +5,8 @@
 #include <string>
 #include "boost/asio.hpp"
 #include "boost/date_time/posix_time/posix_time.hpp"
+#include "raft_server.h"
+
 using boost::asio::ip::tcp;
 
 namespace raft
@@ -31,9 +33,9 @@ private:
   // when server request vote
   bool voted;
 
-  boost::asio::deadline_timer timer;
+  boost::asio::deadline_timer timer_ = boost::asio::deadline_timer(io_service_);
 
-  void setTimerFromNow(boost::posix_time::ptime, std::function<void()>);
+  void setTimerFromNow(boost::posix_time::milliseconds, std::function<void()>);
   void setHeartBeatTimer();
 
   void sendHeartBeat();
