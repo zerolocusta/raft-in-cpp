@@ -2,11 +2,11 @@
 
 namespace raft
 {
-RaftServer::RaftServer(boost::asio::io_service &io_service, const tcp::endpoint &endpoint, const std::string &my_name)
+RaftServer::RaftServer(boost::asio::io_service &io_service, const tcp::endpoint &endpoint, const std::string &server_name)
     : io_service_(io_service),
       socket_(io_service),
       acceptor_(io_service, endpoint),
-      my_name_(my_name),
+      server_name_(server_name),
       state_(raft::RAFT_STATE::RAFT_STATE_FOLLOWER),
       timer_(io_service)
 {
@@ -20,7 +20,7 @@ void RaftServer::doAccept()
                            [this](boost::system::error_code ec) {
                                if (!ec)
                                {
-                                   handleConnection(std::move(socket_));
+                                   this->handleConnection(std::move(socket_));
                                }
                                doAccept();
                            });
@@ -29,11 +29,11 @@ void RaftServer::doAccept()
 void RaftServer::handleConnection(tcp::socket &&socket)
 {
     // TODO: Parse connection message
-    auto node_proxy_ptr = std::make_shared<raft::RaftNodeProxy>(shared_from_this(), <TODO>, io_service_, std::move(socket));
-    all_node_proxy[<TODO>] = node_proxy_ptr;
+//    auto node_proxy_ptr = std::make_shared<raft::RaftNodeProxy>(shared_from_this(), <TODO>, io_service_, std::move(socket));
+//    all_node_proxy[<TODO>] = node_proxy_ptr;
 }
 
-void RaftServer::setTimerFromNow(boost::posix_time::milliseconds deadline_ms_from_now, std::function<void()> timeout_handler)
+void RaftServer::setTimerFromNow(boost::posix_time::milliseconds deadline_ms_from_now, timeout_handler_t timeout_handler)
 {
     timer_.expires_from_now(deadline_ms_from_now);
     timer_.async_wait(timeout_handler);
@@ -42,16 +42,27 @@ void RaftServer::setTimerFromNow(boost::posix_time::milliseconds deadline_ms_fro
 void RaftServer::setFollowerTimer()
 {
     setTimerFromNow(boost::posix_time::milliseconds(genRandomHeartBeatTime()),
-                    [this](){this->becomeCandidate();});
+                    [this](const boost::system::error_code &ec) { this->becomeCandidate(); });
 }
 
 void RaftServer::setCandidateTimer()
 {
     setTimerFromNow(boost::posix_time::milliseconds(ELECTION_TIMEOUT),
-                    [this](){this->becomeCandidate();});
+                    [this](const boost::system::error_code&) { this->becomeCandidate(); });
 }
 
-    void RaftServer::connectTo() {
+void RaftServer::connectTo()
+{
+}
 
-    }
+void RaftNodeProxy::setTimerFromNow(boost::posix_time::milliseconds deadline,timeout_handler_t timeout_handler)
+{
+    timer_.expires_from_now(deadline);
+    timer_.async_wait(timeout_handler);
+}
+
+void RaftNodeProxy::setHeartBeatTimer()
+{
+    setTimerFromNow(boost::posix_time::milliseconds(genRandomHeartBeatTime()), [this](const boost::system::error_code &ec) { this->sendHeartBeat(); });
+}
 } // namespace raft
