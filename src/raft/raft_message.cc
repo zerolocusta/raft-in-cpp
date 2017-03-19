@@ -175,6 +175,7 @@ CommandRequestMessage::CommandRequestMessage(const uint64_t command_id, const st
 {
 }
 
+
 CommandRequestMessage::CommandRequestMessage(const raft_msg::CommandRequest &command_request)
     : command_id_(command_request.command_id()), passwd_(command_request.passwd()), command_type_(command_request.command_type()),
       command_entry_(std::make_pair(command_request.command().key(), command_request.command().value()))
