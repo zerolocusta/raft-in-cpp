@@ -44,7 +44,7 @@ enum
     ELECTION_TIMEOUT = 1000,
     RANDOM_STR_LEN = 40,
     DEFAUTL_PORT = 7970,
-    MESSAGE_HEADER_LEN = sizeof(uint32_t),
+    MESSAGE_HEADER_SIZE = sizeof(uint32_t),
     MESSAGE_MAX_SIZE = UINT32_MAX
 };
 

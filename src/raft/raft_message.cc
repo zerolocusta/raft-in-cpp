@@ -36,7 +36,7 @@ char *PackedMessage::data() const
 
 PackedMessage::~PackedMessage()
 {
-    delete data_;
+    delete[] data_;
 }
 
 // KVEntryMessage
@@ -148,17 +148,47 @@ AppendEntriesResponseMessage::AppendEntriesResponseMessage(
 {
 }
 
-AppendEntriesResponseMessage::AppendEntriesResponseMessage(const raft_msg::AppendEntriesResponse &append_entries_response) : term_(append_entries_response.term()),
-                                                                                                                             current_index_(append_entries_response.current_index()),
-                                                                                                                             commit_index_(append_entries_response.commit_index()),
-                                                                                                                             success_(append_entries_response.success())
+AppendEntriesResponseMessage::AppendEntriesResponseMessage(const raft_msg::AppendEntriesResponse &append_entries_response)
+    : term_(append_entries_response.term()),
+      current_index_(append_entries_response.current_index()),
+      commit_index_(append_entries_response.commit_index()),
+      success_(append_entries_response.success())
 {
 }
 
 std::string AppendEntriesResponseMessage::serializeAsString()
 {
-    return std::string();
+    auto raft_message = RaftMessage();
+    auto append_entries_response_ptr = raft_message.mutable_append_entries_response();
+    append_entries_response_ptr->set_term(term_);
+    append_entries_response_ptr->set_commit_index(commit_index_);
+    append_entries_response_ptr->set_current_index(current_index_);
+    append_entries_response_ptr->set_success(success_);
+    return raft_message.SerializeAsString();
 }
 // AppendEntriesResponseMessage END
 
+CommandRequestMessage::CommandRequestMessage(const uint64_t command_id, const std::string &passwd,
+                                             const raft_msg::CommandType command_type,
+                                             const entry_t &command_entry)
+    : command_id_(command_id), passwd_(passwd), command_type_(command_type), command_entry_(command_entry)
+{
+}
+
+CommandRequestMessage::CommandRequestMessage(const raft_msg::CommandRequest &command_request)
+    : command_id_(command_request.command_id()), passwd_(command_request.passwd()), command_type_(command_request.command_type()),
+      command_entry_(std::make_pair(command_request.command().key(), command_request.command().value()))
+{
+}
+
+std::string CommandRequestMessage::serializeAsString()
+{
+    auto raft_message = RaftMessage();
+    auto command_request_ptr = raft_message.mutable_command_request();
+    command_request_ptr->set_command_id(command_id_);
+    command_request_ptr->set_passwd(passwd_);
+    command_request_ptr->set_command_type(command_type_);
+    command_request_ptr->set_allocated_command(KVEntryMessage(command_entry_).genProtoBufKVEntryMessage());
+    return raft_message.SerializeAsString();
+}
 } // namespace raft

@@ -29,8 +29,8 @@ void RaftServer::doAccept()
 void RaftServer::handleConnection(tcp::socket &&socket)
 {
     // TODO: Parse connection message
-//    auto node_proxy_ptr = std::make_shared<raft::RaftNodeProxy>(shared_from_this(), <TODO>, io_service_, std::move(socket));
-//    all_node_proxy[<TODO>] = node_proxy_ptr;
+    //    auto node_proxy_ptr = std::make_shared<raft::RaftNodeProxy>(shared_from_this(), <TODO>, io_service_, std::move(socket));
+    //    all_node_proxy[<TODO>] = node_proxy_ptr;
 }
 
 void RaftServer::setTimerFromNow(boost::posix_time::milliseconds deadline_ms_from_now, timeout_handler_t timeout_handler)
@@ -48,14 +48,14 @@ void RaftServer::setFollowerTimer()
 void RaftServer::setCandidateTimer()
 {
     setTimerFromNow(boost::posix_time::milliseconds(ELECTION_TIMEOUT),
-                    [this](const boost::system::error_code&) { this->becomeCandidate(); });
+                    [this](const boost::system::error_code &) { this->becomeCandidate(); });
 }
 
 void RaftServer::connectTo()
 {
 }
 
-void RaftNodeProxy::setTimerFromNow(boost::posix_time::milliseconds deadline,timeout_handler_t timeout_handler)
+void RaftNodeProxy::setTimerFromNow(boost::posix_time::milliseconds deadline, timeout_handler_t timeout_handler)
 {
     timer_.expires_from_now(deadline);
     timer_.async_wait(timeout_handler);

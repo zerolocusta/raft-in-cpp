@@ -114,21 +114,21 @@ class CommandRequestMessage : public BaseMessage
 {
 
 public:
-  CommandRequestMessage(const uint64_t, const std::string &, const raft_msg::CommandType, const KVEntryMessage &&);
-  CommandRequestMessage(const raft_msg::CommandRequest &);
+  CommandRequestMessage(const uint64_t command_id, const std::string &passwd, const raft_msg::CommandType command_type, const entry_t &command_entry);
+  CommandRequestMessage(const raft_msg::CommandRequest &command_request);
   std::string serializeAsString() override;
 
 private:
-  const uint64_t command_id;
-  const std::string passwd;
-  const raft_msg::CommandType command_type;
-  const KVEntryMessage connmad_entry;
+  const uint64_t command_id_;
+  const std::string passwd_;
+  const raft_msg::CommandType command_type_;
+  const entry_t command_entry_;
 };
 
 class CommandResponseMessage : public BaseMessage
 {
 public:
-  CommandResponseMessage(const uint64_t, const bool, const std::string &, const raft_msg::CommandResponseErr, const KVEntryMessage &&);
+  CommandResponseMessage(const uint64_t, const bool, const std::string &, const raft_msg::CommandResponseErr, const entry_t &);
   CommandResponseMessage(const raft_msg::CommandResponse &);
   std::string serializeAsString() override;
 
@@ -137,7 +137,7 @@ private:
   const bool success;
   const std::string passwd;
   const raft_msg::CommandResponseErr err;
-  const KVEntryMessage result;
+  const entry_t result;
 };
 
 class JoinRequestMessage : public BaseMessage
