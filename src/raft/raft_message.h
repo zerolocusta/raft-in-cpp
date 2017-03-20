@@ -128,16 +128,17 @@ private:
 class CommandResponseMessage : public BaseMessage
 {
 public:
-  CommandResponseMessage(const uint64_t, const bool, const std::string &, const raft_msg::CommandResponseErr, const entry_t &);
-  CommandResponseMessage(const raft_msg::CommandResponse &);
+  CommandResponseMessage(const uint64_t command_id, const bool success, const std::string &passwd,
+                         const raft_msg::CommandResponseErr err, const entry_t &result);
+  CommandResponseMessage(const raft_msg::CommandResponse &command_response);
   std::string serializeAsString() override;
 
 private:
-  const uint64_t command_id;
-  const bool success;
-  const std::string passwd;
-  const raft_msg::CommandResponseErr err;
-  const entry_t result;
+  const uint64_t command_id_;
+  const bool success_;
+  const std::string passwd_;
+  const raft_msg::CommandResponseErr err_;
+  const entry_t result_;
 };
 
 class JoinRequestMessage : public BaseMessage

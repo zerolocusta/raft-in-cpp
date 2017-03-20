@@ -4,7 +4,7 @@
 
 #include "gtest/gtest.h"
 #include "raft/raft_message.h"
-
+#include "raft/raft_node_proxy.h"
 
 using namespace raft;
 

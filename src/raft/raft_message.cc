@@ -1,3 +1,4 @@
+#include <err.h>
 #include "raft_message.h"
 
 namespace raft
@@ -114,7 +115,7 @@ AppendEntriesRequestMessage::AppendEntriesRequestMessage(const raft_msg::AppendE
 
 std::string AppendEntriesRequestMessage::serializeAsString()
 {
-    auto raft_message = RaftMessage();
+    RaftMessage raft_message;
     auto append_entries_request_ptr = raft_message.mutable_append_entries_request();
     append_entries_request_ptr->set_term(term_);
     append_entries_request_ptr->set_prev_log_index(prev_log_index_);
@@ -184,7 +185,7 @@ CommandRequestMessage::CommandRequestMessage(const raft_msg::CommandRequest &com
 
 std::string CommandRequestMessage::serializeAsString()
 {
-    auto raft_message = RaftMessage();
+    RaftMessage raft_message;
     auto command_request_ptr = raft_message.mutable_command_request();
     command_request_ptr->set_command_id(command_id_);
     command_request_ptr->set_passwd(passwd_);
@@ -192,4 +193,30 @@ std::string CommandRequestMessage::serializeAsString()
     command_request_ptr->set_allocated_command(KVEntryMessage(command_entry_).genProtoBufKVEntryMessage());
     return raft_message.SerializeAsString();
 }
+
+    CommandResponseMessage::CommandResponseMessage(const uint64_t command_id, const bool success,
+                                                   const std::string &passwd, const raft_msg::CommandResponseErr err,
+                                                   const entry_t &result)
+     :command_id_(command_id), success_(success), passwd_(passwd), err_(err), result_(result)
+    {
+    }
+
+    CommandResponseMessage::CommandResponseMessage(const raft_msg::CommandResponse &command_response)
+    :command_id_(command_response.command_id()), success_(command_response.success()), passwd_(command_response.passwd()),
+    err_(command_response.err()), result_(std::make_pair(command_response.result().key(), command_response.result().value())){
+
+    }
+
+    std::string CommandResponseMessage::serializeAsString() {
+        RaftMessage raft_message;
+        auto command_response_ptr = raft_message.mutable_command_response();
+        command_response_ptr->set_command_id(command_id_);
+        command_response_ptr->set_success(success_);
+        command_response_ptr->set_passwd(passwd_);
+        command_response_ptr->set_err(err_);
+        command_response_ptr->set_allocated_result(KVEntryMessage(result_).genProtoBufKVEntryMessage());
+        return raft_message.SerializeAsString();
+    }
+
+
 } // namespace raft
