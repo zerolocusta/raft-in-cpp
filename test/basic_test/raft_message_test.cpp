@@ -25,5 +25,6 @@ TEST(raft_message_test, test_packed_message){
     std::string str_empty;
     testingPackedMessage(str_123);
     testingPackedMessage(str_empty);
+
 }
 

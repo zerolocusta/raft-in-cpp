@@ -149,10 +149,10 @@ public:
   std::string serializeAsString() override;
 
 private:
-  const raft_msg::JoinRole role;
-  const std::string ipaddr;
-  const std::string passwd;
-  const std::string myname;
+  const raft_msg::JoinRole role_;
+  const std::string ipaddr_;
+  const std::string passwd_;
+  const std::string name_;
 };
 
 class JoinResponseMessage : public BaseMessage
@@ -164,10 +164,10 @@ public:
   std::string serializeAsString() override;
 
 private:
-  const bool success;
-  const std::string myname;
-  const std::string passwd;
-  const raft_msg::JoinError join_err;
+  const bool success_;
+  const std::string name_;
+  const std::string passwd_;
+  const raft_msg::JoinError err_;
 };
 
 class VoteRequestMessage : public BaseMessage

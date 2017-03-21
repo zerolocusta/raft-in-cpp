@@ -176,7 +176,6 @@ CommandRequestMessage::CommandRequestMessage(const uint64_t command_id, const st
 {
 }
 
-
 CommandRequestMessage::CommandRequestMessage(const raft_msg::CommandRequest &command_request)
     : command_id_(command_request.command_id()), passwd_(command_request.passwd()), command_type_(command_request.command_type()),
       command_entry_(std::make_pair(command_request.command().key(), command_request.command().value()))
@@ -194,29 +193,56 @@ std::string CommandRequestMessage::serializeAsString()
     return raft_message.SerializeAsString();
 }
 
-    CommandResponseMessage::CommandResponseMessage(const uint64_t command_id, const bool success,
-                                                   const std::string &passwd, const raft_msg::CommandResponseErr err,
-                                                   const entry_t &result)
-     :command_id_(command_id), success_(success), passwd_(passwd), err_(err), result_(result)
-    {
-    }
+CommandResponseMessage::CommandResponseMessage(const uint64_t command_id, const bool success,
+                                               const std::string &passwd, const raft_msg::CommandResponseErr err,
+                                               const entry_t &result)
+    : command_id_(command_id), success_(success), passwd_(passwd), err_(err), result_(result)
+{
+}
 
-    CommandResponseMessage::CommandResponseMessage(const raft_msg::CommandResponse &command_response)
-    :command_id_(command_response.command_id()), success_(command_response.success()), passwd_(command_response.passwd()),
-    err_(command_response.err()), result_(std::make_pair(command_response.result().key(), command_response.result().value())){
+CommandResponseMessage::CommandResponseMessage(const raft_msg::CommandResponse &command_response)
+    : command_id_(command_response.command_id()), success_(command_response.success()), passwd_(command_response.passwd()),
+      err_(command_response.err()), result_(std::make_pair(command_response.result().key(), command_response.result().value()))
+{
+}
 
-    }
+std::string CommandResponseMessage::serializeAsString()
+{
+    RaftMessage raft_message;
+    auto command_response_ptr = raft_message.mutable_command_response();
+    command_response_ptr->set_command_id(command_id_);
+    command_response_ptr->set_success(success_);
+    command_response_ptr->set_passwd(passwd_);
+    command_response_ptr->set_err(err_);
+    command_response_ptr->set_allocated_result(KVEntryMessage(result_).genProtoBufKVEntryMessage());
+    return raft_message.SerializeAsString();
+}
 
-    std::string CommandResponseMessage::serializeAsString() {
-        RaftMessage raft_message;
-        auto command_response_ptr = raft_message.mutable_command_response();
-        command_response_ptr->set_command_id(command_id_);
-        command_response_ptr->set_success(success_);
-        command_response_ptr->set_passwd(passwd_);
-        command_response_ptr->set_err(err_);
-        command_response_ptr->set_allocated_result(KVEntryMessage(result_).genProtoBufKVEntryMessage());
-        return raft_message.SerializeAsString();
-    }
+JoinRequestMessage::JoinRequestMessage(const raft_msg::JoinRole role, const std::string &ipaddr, const std::string &passwd,
+                                       const std::string &name)
+    : role_(role), ipaddr_(ipaddr), passwd_(passwd), name_(name)
+{
+}
 
+JoinRequestMessage::JoinRequestMessage(const raft_msg::JoinRequest &join_request)
+    : role_(join_request.role()), ipaddr_(join_request.ipaddr()), passwd_(join_request.passwd()), name_(join_request.myname())
+{
+}
 
+std::string JoinRequestMessage::serializeAsString()
+{
+    RaftMessage raft_message;
+    auto join_request_ptr = raft_message.mutable_join_request();
+    join_request_ptr->set_role(role_);
+    join_request_ptr->set_ipaddr(ipaddr_);
+    join_request_ptr->set_passwd(passwd_);
+    join_request_ptr->set_myname(name_);
+    return raft_message.SerializeAsString();
+}
+
+JoinResponseMessage::JoinResponseMessage(const bool success, const std::string &name, const std::string &passwd,
+                                         const raft_msg::JoinError err)
+    : success_(success), passwd_(passwd), name_(name), err_(err)
+{
+}
 } // namespace raft

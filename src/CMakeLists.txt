@@ -17,6 +17,7 @@ set(HEADER_FILES
         raft/raft_log.h
         raft/raft_message.h
         raft/raft_server.h
+        raft/raft_node_proxy.h
         )
 set(SOURCE_FILES
         protobuf/append_entries_request.pb.cc
@@ -34,7 +35,7 @@ set(SOURCE_FILES
         raft/raft_log.cc
         raft/raft_message.cc
         raft/raft_server.cc
-        raft/raft_node_proxy.h)
+        raft/raft_node_proxy.cc)
 
 add_library(simple_raft_kvdb_cpp STATIC ${SOURCE_FILES} ${HEADER_FILES})
 find_package(Boost 1.63.0 COMPONENTS system filesystem REQUIRED)
