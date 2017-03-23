@@ -21,8 +21,7 @@ class RaftNodeProxy;
 namespace raft
 {
 
-
-    typedef std::function<void(const boost::system::error_code&)> timeout_handler_t;
+typedef std::function<void(const boost::system::error_code &)> timeout_handler_t;
 
 /* RaftServer represent local raft node*/
 class RaftServer : public std::enable_shared_from_this<RaftServer>

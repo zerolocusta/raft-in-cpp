@@ -245,4 +245,59 @@ JoinResponseMessage::JoinResponseMessage(const bool success, const std::string &
     : success_(success), passwd_(passwd), name_(name), err_(err)
 {
 }
+
+JoinResponseMessage::JoinResponseMessage(const raft_msg::JoinResponse &join_response)
+    : success_(join_response.success()), passwd_(join_response.passwd()), name_(join_response.myname()), err_(join_response.join_err())
+{
+}
+
+std::string JoinResponseMessage::serializeAsString()
+{
+    RaftMessage raft_message;
+    auto join_response_ptr = raft_message.mutable_join_response();
+    join_response_ptr->set_success(success_);
+    join_response_ptr->set_passwd(passwd_);
+    join_response_ptr->set_myname(name_);
+    join_response_ptr->set_join_err(err_);
+    return raft_message.SerializeAsString();
+}
+
+VoteRequestMessage::VoteRequestMessage(const uint64_t term, const uint64_t last_log_index,
+                                       const uint64_t last_log_term)
+    : term_(term), last_log_index_(last_log_index), last_log_term_(last_log_term)
+{
+}
+
+VoteRequestMessage::VoteRequestMessage(const raft_msg::VoteRequest &vote_request)
+    : term_(vote_request.term()), last_log_index_(vote_request.last_log_index()), last_log_term_(vote_request.last_log_term())
+{
+}
+
+std::string VoteRequestMessage::serializeAsString()
+{
+    RaftMessage raft_message;
+    auto vote_request_ptr = raft_message.mutable_vote_request();
+    vote_request_ptr->set_term(term_);
+    vote_request_ptr->set_last_log_index(last_log_term_);
+    vote_request_ptr->set_last_log_term(last_log_term_);
+    return raft_message.SerializeAsString();
+}
+
+VoteResponseMessage::VoteResponseMessage(const uint64_t term, const bool vote_granted)
+    : term_(term), vote_granted_(vote_granted)
+{
+}
+
+VoteResponseMessage::VoteResponseMessage(const raft_msg::VoteResponse &vote_response) : term_(vote_response.term()), vote_granted_(vote_response.vote_granted())
+{
+}
+
+std::string VoteResponseMessage::serializeAsString()
+{
+    RaftMessage raft_message;
+    auto vote_response_ptr = raft_message.mutable_vote_response();
+    vote_response_ptr->set_term(term_);
+    vote_response_ptr->set_vote_granted(vote_granted_);
+    return raft_message.SerializeAsString();
+}
 } // namespace raft

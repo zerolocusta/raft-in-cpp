@@ -173,29 +173,28 @@ private:
 class VoteRequestMessage : public BaseMessage
 {
 public:
-  VoteRequestMessage(const uint64_t, const uint64_t, const uint64_t, const std::string);
-  VoteRequestMessage(const raft_msg::VoteRequest &);
+  VoteRequestMessage(const uint64_t term, const uint64_t last_log_index, const uint64_t last_log_term);
+  VoteRequestMessage(const raft_msg::VoteRequest &vote_request);
 
   std::string serializeAsString() override;
 
 private:
-  const uint64_t term;
-  const uint64_t last_log_index;
-  const uint64_t last_log_term;
-  const std::string candidate_name;
+  const uint64_t term_;
+  const uint64_t last_log_index_;
+  const uint64_t last_log_term_;
 };
 
 class VoteResponseMessage : public BaseMessage
 {
 public:
-  VoteResponseMessage(const uint64_t, const bool);
-  VoteResponseMessage(const raft_msg::VoteResponse &);
+  VoteResponseMessage(const uint64_t term, const bool vote_granted);
+  VoteResponseMessage(const raft_msg::VoteResponse &vote_response);
 
   std::string serializeAsString() override;
 
 private:
-  const uint64_t term;
-  const bool vote_granted;
+  const uint64_t term_;
+  const bool vote_granted_;
 };
 
 } // namespace raft
